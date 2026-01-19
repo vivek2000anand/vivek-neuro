@@ -67,8 +67,3 @@ With their Google One subscription they're moving towards a bundling strategy si
 Despite the crazy increase in stock price google has seen this year, I still think their is room to grow (ask your financial advisor and don't take my word for it and do your own research) given their strong economics and their lock on crazy amounts of data.
 
 So yes, this website was built with love with antigravity and zola and typst.
-
-== Section 2
-
-- List item 1
-- List item 2
