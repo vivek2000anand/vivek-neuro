@@ -1,0 +1,22 @@
+# Build output
+public/
+
+# Zola cache
+.zola-cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Editor backup files
+*~
+*.swp
+*.swo
+
+# Local environment
+.env
+.env.local

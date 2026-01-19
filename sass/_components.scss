@@ -1,0 +1,734 @@
+// ==============================================
+// COMPONENTS - Reusable UI elements
+// ==============================================
+
+@use 'variables' as *;
+
+// ============ Navigation ============
+.nav {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  padding: $spacing-lg 0;
+  border-bottom: 1px solid var(--color-border);
+  
+  &__brand {
+    font-weight: 600;
+    font-size: $font-size-lg;
+    color: var(--color-text-primary);
+    
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+  
+  &__links {
+    display: flex;
+    gap: $spacing-md;
+    margin-left: auto;
+    align-items: center;
+  }
+  
+  &__link {
+    color: var(--color-text-secondary);
+    font-size: $font-size-sm;
+    
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+}
+
+// ============ Theme Toggle ============
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: $radius-md;
+  padding: $spacing-sm;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-text-secondary);
+  transition: all $transition-fast;
+  
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background-color: var(--color-bg-elevated);
+  }
+  
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+  
+  // Hide the non-active icon
+  .icon-sun { display: none; }
+  .icon-moon { display: block; }
+}
+
+// Light mode: show sun, hide moon
+[data-theme="light"] .theme-toggle {
+  .icon-sun { display: block; }
+  .icon-moon { display: none; }
+}
+
+// ============ Hero Section ============
+.hero {
+  text-align: left;
+  margin-bottom: $spacing-3xl;
+  
+  &__title {
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-md;
+  }
+  
+  &__subtitle {
+    font-size: $font-size-lg;
+    color: var(--color-text-secondary);
+  }
+}
+
+// ============ Post List ============
+.post-list {
+  &__title {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-lg;
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+  
+  &__items {
+    list-style: none;
+    padding: 0;
+  }
+  
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: $spacing-md 0;
+    border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    
+    &:first-child {
+      border-top: 1px solid var(--color-border);
+    }
+  }
+  
+  &__link {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+  
+  &__date {
+    font-size: $font-size-sm;
+    color: var(--color-text-muted);
+  }
+  
+  &__tags {
+    display: flex;
+    gap: $spacing-xs;
+    margin-left: auto;
+  }
+}
+
+// ============ Blog Post ============
+.blog-post {
+  &__header {
+    margin-bottom: $spacing-2xl;
+  }
+  
+  &__title {
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-sm;
+  }
+  
+  &__meta {
+    font-size: $font-size-sm;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+  }
+  
+  &__tags {
+    display: flex;
+    gap: $spacing-xs;
+  }
+  
+  &__content {
+    line-height: $line-height-relaxed;
+    
+    // Typst content wrapper
+    .typst-post {
+      h1, h2, h3, h4 {
+        margin-top: $spacing-xl;
+      }
+      
+      h1:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+// ============ Tags ============
+.tag {
+  display: inline-block;
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-secondary);
+  font-size: $font-size-sm;
+  padding: 2px 10px;
+  border-radius: $radius-lg;
+  border: 1px solid var(--color-border);
+  transition: all $transition-fast;
+  
+  &:hover {
+    background-color: var(--color-accent);
+    color: var(--color-bg-primary);
+    border-color: var(--color-accent);
+  }
+}
+
+.tag-list {
+  &__title {
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    list-style: none;
+    padding: 0;
+  }
+  
+  &__count {
+    font-size: $font-size-sm;
+    color: var(--color-text-muted);
+    margin-left: $spacing-xs;
+  }
+}
+
+// ============ Math (MathJax) ============
+.math {
+  overflow-x: auto;
+  
+  &.display {
+    margin: $spacing-lg 0;
+    text-align: center;
+  }
+}
+
+// ============ Hero Section (Photo + Greeting) ============
+.hero {
+  margin-bottom: $spacing-xl;
+  
+  &__layout {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2xl;
+    
+    @media (max-width: 600px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  
+  &__photo {
+    flex-shrink: 0;
+    
+    @media (max-width: 600px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  &__image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-border);
+  }
+  
+  &__greeting {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &__title {
+    font-size: $font-size-2xl;
+    margin: 0;
+    line-height: 1.2;
+    text-align: center;
+  }
+}
+
+// ============ Bio Section (Full Width) ============
+.bio {
+  margin-bottom: $spacing-2xl;
+  
+  &__content {
+    color: var(--color-text-secondary);
+    line-height: $line-height-relaxed;
+    
+    p {
+      margin-bottom: $spacing-md;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    ol, ul {
+      margin: $spacing-sm 0;
+      padding-left: $spacing-xl;
+      
+      li {
+        margin-bottom: $spacing-xs;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    
+    a {
+      color: var(--color-accent);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+      
+      &:hover {
+        color: var(--color-text-primary);
+      }
+    }
+  }
+}
+
+// ============ Social Links ============
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+  
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    transition: all $transition-fast;
+    
+    &:hover {
+      background-color: var(--color-accent);
+      border-color: var(--color-accent);
+      color: var(--color-bg-primary);
+      transform: translateY(-2px);
+    }
+    
+    svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+  }
+}
+
+// ============ Education Section ============
+.education {
+  margin-bottom: $spacing-2xl;
+  
+  &__title {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-lg;
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+  
+  &__items {
+    list-style: none;
+    padding: 0;
+  }
+  
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: $spacing-sm 0;
+    border-bottom: 1px solid var(--color-border);
+    gap: $spacing-lg;
+    
+    &:first-child {
+      border-top: 1px solid var(--color-border);
+    }
+    
+    @media (max-width: 600px) {
+      flex-direction: column;
+      gap: $spacing-xs;
+    }
+  }
+  
+  &__degree {
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  
+  &__details {
+    text-align: right;
+    color: var(--color-text-secondary);
+    font-size: $font-size-sm;
+    white-space: nowrap;
+    
+    @media (max-width: 600px) {
+      text-align: left;
+    }
+  }
+  
+  &__institution {
+    color: var(--color-text-secondary);
+  }
+  
+  &__year {
+    color: var(--color-text-muted);
+    margin-left: $spacing-sm;
+  }
+}
+
+// ============ Publications Section ============
+.publications {
+  margin-bottom: $spacing-2xl;
+  
+  &__title {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-lg;
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+  
+  &__items {
+    list-style: none;
+    padding: 0;
+  }
+  
+  &__item {
+    padding: $spacing-md 0;
+    border-bottom: 1px solid var(--color-border);
+    
+    &:first-child {
+      border-top: 1px solid var(--color-border);
+    }
+  }
+  
+  &__citation {
+    margin-bottom: $spacing-sm;
+  }
+  
+  &__link {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    display: block;
+    margin-bottom: $spacing-xs;
+    
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+  
+  &__meta {
+    font-size: $font-size-sm;
+    color: var(--color-text-secondary);
+    line-height: $line-height-relaxed;
+  }
+  
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-xs;
+    margin-top: $spacing-sm;
+  }
+  
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-left: auto;
+    
+    @media (max-width: 600px) {
+      margin-left: 0;
+      margin-top: $spacing-xs;
+      width: 100%;
+    }
+  }
+  
+  &__see-all {
+    margin-top: $spacing-lg;
+    text-align: center;
+    
+    a {
+      color: var(--color-accent);
+      font-weight: 500;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Publications Listing Page
+.publications-page {
+  h1 {
+    font-size: $font-size-2xl;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+// Author highlighting
+.author-me {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+// Award badge
+.pub-award {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: #15803d;
+  background-color: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  border-radius: $radius-lg;
+  
+  svg {
+    width: 14px;
+    height: 14px;
+    fill: #15803d;
+  }
+}
+// ============ Publication Action Buttons ============
+.pub-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 4px 10px;
+  font-size: $font-size-sm;
+  border-radius: $radius-md;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  transition: all $transition-fast;
+  text-decoration: none;
+  
+  svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+  
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  
+  &--paper:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+    color: #3b82f6;
+  }
+  
+  &--doi:hover {
+    background-color: rgba(245, 158, 11, 0.1);
+    border-color: #f59e0b;
+    color: #f59e0b;
+  }
+  
+  &--slides:hover {
+    background-color: rgba(236, 72, 153, 0.1);
+    border-color: #ec4899;
+    color: #ec4899;
+  }
+  
+  &--video:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+    color: #ef4444;
+  }
+  
+  &--code:hover {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-color: #10b981;
+    color: #10b981;
+  }
+  
+  &--blog:hover {
+    background-color: rgba(139, 92, 246, 0.1);
+    border-color: #8b5cf6;
+    color: #8b5cf6;
+  }
+  
+  &--poster:hover {
+    background-color: rgba(249, 115, 22, 0.1);
+    border-color: #f97316;
+    color: #f97316;
+  }
+  
+  &--website:hover {
+    background-color: rgba(6, 182, 212, 0.1);
+    border-color: #06b6d4;
+    color: #06b6d4;
+  }
+}
+
+// ============ Small Tags ============
+.tag--small {
+  font-size: 0.75rem;
+  padding: 1px 8px;
+}
+
+// ============ Publication Page ============
+.publication-page {
+  &__header {
+    margin-bottom: $spacing-2xl;
+  }
+  
+  &__title {
+    font-size: $font-size-2xl;
+    margin-bottom: $spacing-md;
+  }
+  
+  &__meta {
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__authors {
+    color: var(--color-text-secondary);
+    margin-bottom: $spacing-xs;
+  }
+  
+  &__venue {
+    color: var(--color-text-muted);
+    font-size: $font-size-sm;
+  }
+  
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+  }
+  
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+  }
+  
+  &__abstract {
+    h2 {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-md;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+    
+    p {
+      line-height: $line-height-relaxed;
+      color: var(--color-text-secondary);
+    }
+  }
+}
+
+// ============ Tag Page (Unified View) ============
+.tag-page {
+  h1 {
+    font-size: $font-size-2xl;
+    margin-bottom: $spacing-xs;
+  }
+  
+  &__count {
+    color: var(--color-text-muted);
+    margin-bottom: $spacing-xl;
+  }
+  
+  &__items {
+    list-style: none;
+    padding: 0;
+  }
+  
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm 0;
+    border-bottom: 1px solid var(--color-border);
+    
+    &:first-child {
+      border-top: 1px solid var(--color-border);
+    }
+  }
+  
+  &__type {
+    flex-shrink: 0;
+  }
+  
+  &__icon {
+    width: 18px;
+    height: 18px;
+    fill: var(--color-text-muted);
+    
+    &--pub {
+      fill: #3b82f6;
+    }
+    
+    &--blog {
+      fill: #8b5cf6;
+    }
+  }
+  
+  &__link {
+    flex: 1;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+  
+  &__date {
+    font-size: $font-size-sm;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+  
+  &__back {
+    margin-top: $spacing-xl;
+  }
+}

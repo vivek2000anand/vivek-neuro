@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+
+{% block content %}
+    <article class="publication-page">
+        <header class="publication-page__header">
+            <h1 class="publication-page__title">{{ page.title }}</h1>
+            
+            <div class="publication-page__meta">
+                {% if page.extra.authors %}
+                <p class="publication-page__authors">{{ page.extra.authors }}</p>
+                {% endif %}
+                
+                {% if page.extra.venue %}
+                <p class="publication-page__venue">
+                    <em>{{ page.extra.venue }}</em>{% if page.date %}, {{ page.date | date(format="%Y") }}{% endif %}
+                </p>
+                {% endif %}
+            </div>
+            
+            {# Action Buttons #}
+            <div class="publication-page__buttons">
+                {% set pub = page %}
+                {% include "partials/pub-buttons.html" %}
+                {% if page.extra.award %}
+                <span class="pub-award">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>
+                    {{ page.extra.award }}
+                </span>
+                {% endif %}
+            </div>
+            
+            {# Tags #}
+            {% if page.taxonomies.tags %}
+            <div class="publication-page__tags">
+                {% for tag in page.taxonomies.tags %}
+                <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}" class="tag">{{ tag }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </header>
+        
+        {% if page.content %}
+        <section class="publication-page__abstract">
+            <h2>Abstract</h2>
+            {{ page.content | safe }}
+        </section>
+        {% endif %}
+    </article>
+{% endblock %}

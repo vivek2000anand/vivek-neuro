@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Publications | {{ config.title }}{% endblock %}
+
+{% block content %}
+    <section class="publications-page">
+        <h1>Publications</h1>
+        
+        {% if section.pages %}
+        <ul class="publications__items">
+            {% for pub in section.pages | sort(attribute="date") | reverse %}
+            <li class="publications__item">
+                <div class="publications__citation">
+                    <a href="{{ pub.permalink }}" class="publications__link">{{ pub.title }}</a>
+                    <span class="publications__meta">
+                        {% if pub.extra.authors %}{{ pub.extra.authors | replace(from="Anand, Vivek", to="<strong class='author-me'>Anand, Vivek</strong>") | safe }}. {% endif %}
+                        {% if pub.extra.venue %}<em>{{ pub.extra.venue }}</em>, {% endif %}
+                        {{ pub.date | date(format="%Y") }}.
+                    </span>
+                </div>
+                <div class="publications__actions">
+                    {% include "partials/pub-buttons.html" %}
+                    {% if pub.extra.award %}
+                    <span class="pub-award">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>
+                        {{ pub.extra.award }}
+                    </span>
+                    {% endif %}
+                    {% if pub.taxonomies.tags %}
+                    <div class="publications__tags">
+                        {% for tag in pub.taxonomies.tags %}
+                        <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}" class="tag tag--small">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No publications yet.</p>
+        {% endif %}
+    </section>
+{% endblock %}

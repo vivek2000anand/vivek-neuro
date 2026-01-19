@@ -1,0 +1,29 @@
+// ==============================================
+// LAYOUT - Page structure and containers
+// ==============================================
+
+@use 'variables' as *;
+
+// Main container
+.container {
+  max-width: $max-width-content;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}
+
+.container-wide {
+  max-width: $max-width-wide;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}
+
+// Main content area
+main {
+  padding: $spacing-2xl 0;
+  min-height: calc(100vh - 80px);
+}
+
+// Section spacing
+section {
+  margin-bottom: $spacing-3xl;
+}

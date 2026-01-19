@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Tag: {{ term.name }} | {{ config.title }}{% endblock %}
+
+{% block content %}
+    <section class="tag-page">
+        <h1>Tagged "{{ term.name }}"</h1>
+        <p class="tag-page__count">
+            {{ term.pages | length }} item{% if term.pages | length != 1 %}s{% endif %}
+        </p>
+        
+        <ul class="tag-page__items">
+            {% for page in term.pages | sort(attribute="date") | reverse %}
+                <li class="tag-page__item">
+                    <span class="tag-page__type">
+                        {% if page.extra.entry_type %}
+                        <svg viewBox="0 0 24 24" class="tag-page__icon tag-page__icon--pub" title="Publication"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/></svg>
+                        {% else %}
+                        <svg viewBox="0 0 24 24" class="tag-page__icon tag-page__icon--blog" title="Blog Post"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        {% endif %}
+                    </span>
+                    <a href="{{ page.permalink }}" class="tag-page__link">{{ page.title }}</a>
+                    <time class="tag-page__date">{{ page.date | date(format="%Y") }}</time>
+                </li>
+            {% endfor %}
+        </ul>
+        
+        <p class="tag-page__back">
+            <a href="{{ get_url(path='tags') }}">&larr; All tags</a>
+        </p>
+    </section>
+{% endblock %}
