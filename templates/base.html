@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{{ config.title | default(value="Research Blog") }}{% endblock %}</title>
+    <title>Welcome to Vivek</title>
     <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
     <link rel="icon" type="image/png" href="{{ get_url(path='favicon.png') }}">
     
@@ -36,7 +36,7 @@
 <body>
     <div class="container">
         <nav class="nav">
-            <a href="{{ get_url(path='@/_index.md') }}" class="nav__brand">{{ config.title | default(value="Research") }}</a>
+            <a href="{{ get_url(path='@/_index.md') }}" class="nav__brand">Welcome to Vivek</a>
             <div class="nav__links">
                 <a href="{{ get_url(path='@/blog/_index.md') }}" class="nav__link">Blog</a>
                 <a href="{{ get_url(path='@/publications/_index.md') }}" class="nav__link">Publications</a>
@@ -55,6 +55,10 @@
         <main>
             {% block content %}{% endblock %}
         </main>
+        
+        <footer class="footer">
+            <p>Vibecoded with love by <a href="https://deepmind.google/technologies/gemini/" target="_blank">Antigravity</a> using <a href="https://www.getzola.org/" target="_blank">Zola</a> and <a href="https://typst.app/" target="_blank">typst</a></p>
+        </footer>
     </div>
     
     <script>

@@ -27,3 +27,24 @@ main {
 section {
   margin-bottom: $spacing-3xl;
 }
+
+// Footer
+.footer {
+  margin-top: auto;
+  padding: $spacing-xl 0 $spacing-2xl;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: $font-size-sm;
+  
+  a {
+    color: var(--color-text-secondary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+}
