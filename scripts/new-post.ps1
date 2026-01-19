@@ -1,9 +1,10 @@
 # new-post.ps1 - Create a new Typst blog post
-# Usage: .\scripts\new-post.ps1 -Title "My Post Title"
+# Usage: .\scripts\new-post.ps1 -Title "My Post Title" -Tags "tag1, tag2"
 
 param(
     [Parameter(Mandatory=$true)]
-    [string]$Title
+    [string]$Title,
+    [string]$Tags = ""
 )
 
 # Create slug from title (lowercase, replace spaces with hyphens, remove special chars)
@@ -19,12 +20,22 @@ if (Test-Path $postDir) {
 
 New-Item -ItemType Directory -Path $postDir -Force | Out-Null
 
+# Prepare tags for TOML array
+$tagsLine = ""
+if ($Tags) {
+    # Split by comma, trim, quote, and join
+    $tagList = ($Tags -split ',' | ForEach-Object { "`"$($_.Trim())`"" }) -join ', '
+    $tagsLine = "tags = [$tagList]"
+}
+
 # Create index.md with frontmatter
 $indexContent = @"
 +++
 title = "$Title"
 date = $date
-template = "blog-page.html" 
+template = "blog-page.html"
+[taxonomies]
+$tagsLine
 +++
 
 {{ typst(src="content/blog/$slug/content.html") }}
