@@ -41,7 +41,14 @@
                 </div>
             </div>
             <div class="hero__greeting">
+                {% if section.extra.greeting_line_1 and section.extra.greeting_line_2 %}
+                <h1 class="hero__title">
+                    <span style="display: block;">{{ section.extra.greeting_line_1 | safe }}</span>
+                    <span style="display: block;">{{ section.extra.greeting_line_2 }}</span>
+                </h1>
+                {% else %}
                 <h1 class="hero__title">{{ section.title }}</h1>
+                {% endif %}
             </div>
         </div>
     </section>

@@ -8,6 +8,8 @@ linkedin = "https://www.linkedin.com/in/vivek2000anand/"
 github = "https://github.com/vivek2000anand/"
 scholar = "https://scholar.google.com/citations?user=Ay8t9aIAAAAJ&hl=en"
 email = "vivekanandneuro@gmail.com"
+greeting_line_1 = "Namaskaram <span class='emoji-small'>🙏🏽</span>,"
+greeting_line_2 = "I'm Vivek"
 
 [[extra.bio_paragraphs]]
 text = "I'm a PhD Student in Machine Learning at Georgia Tech where I am advised by"
