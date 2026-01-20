@@ -47,7 +47,7 @@ To get around this, I decided to use some static site generators to build my web
 
 Gemini, found #link("https://github.com/dark-flames/apollo-typst/tree/main")[this] one repo on Github that used Zola and used the experimental Typst features to export to HTML. Unfortunately, after a better part of Sunday, the typst didn't show up locally or on my Netlify deployment. Later, I started using #link("https://tola-rs.github.io/example-sites/")[Tola], a small wrapper on top of Typst that works for static site generator but when I got hungry I decided to pivot as the maintainer warned that it was very early stage and that things would change drastically. Being the lazy person I am, I wanted to use something that was easy to use, would last a long time but still aesthetically pleasing.
 
-Having heard a lot about #link("https://antigravity.dev/")[antigravity] recently with #link("https://github.com/torvalds/AudioNoise")[Linus Torvald],the creator of the Linux kernel using it I decided to give it a try. 
+Having heard a lot about #link("https://antigravity.google/")[antigravity] recently with #link("https://github.com/torvalds/AudioNoise")[Linus Torvald],the creator of the Linux kernel using it I decided to give it a try. 
 
 As someone who had not used Cursor before, it was a refreshing surprise to see the VSCode like interface and the ease of use. Moreover,with the free year of Google Pro, I had enough tokens to really try it out even with the really good Claude Opus 4.5 model.
 
@@ -59,7 +59,7 @@ Then, once the local version was running on my browser, I asked it to help me de
 
 = Ramifications for the Future
 
-I'm genuinely impressed by the ease of use, the accuracy of the output and the sheer next level it takes coding from the copy paste into ChatGPT/Perplexity/Gemini days. Some of the #link("https://github.com/vivek2000anand/vivek_neuro")[code] is definitely a bit hard coded if you dig in and could be more modular etc. but it is more than enough for my needs and my personal website requirements. I more than likely will be using the same framework for the rest of my PhD.
+I'm genuinely impressed by the ease of use, the accuracy of the output and the sheer next level it takes coding from the copy paste into ChatGPT/Perplexity/Gemini days. Some of the #link("https://github.com/vivek2000anand/vivek-neuro")[code] is definitely a bit hard coded if you dig in and could be more modular etc. but it is more than enough for my needs and my personal website requirements. I more than likely will be using the same framework for the rest of my PhD.
 
 However, I probably will start using it even for my research. Till now, I've been very hesitant to use AI tools for my own research as I need to have complete control over what I code and the output it gives. Given that I'm not the best coder, I need to have confidence that what I think the code is doing is what it is doing. With this website, I have a lot more confidence and I might dip my toes into using it for my research code.
 
@@ -68,6 +68,6 @@ Given the scale of money the tech companies are pouring into artificial intellig
 
 With their Google One subscription they're moving towards a bundling strategy similar to microsoft but unlike microsoft the products are actually quite good. They've just started integrating it into Gmail, Drive etc. And given the cash they have, they can afford the free Pro subscriptions for students. It is gonna be incredibly difficult for me to switch next year when the subscriptions are not free and pay the roughly \$300 per year. It must be noted that last year, I said the same thing about Perplexity when I got the free subscription but this year I'll probably cancel mine soon as it just isn't needed or worth it anymore.
 
-Despite the crazy increase in stock price google has seen this year, I still think their is room to grow (ask your financial advisor and don't take my word for it and do your own research) given their strong economics and their lock on crazy amounts of data.
+Despite the crazy increase in stock price google has seen this year, I still think there is room to grow (ask your financial advisor and don't take my word for it and do your own research) given their strong economics and their lock on crazy amounts of data.
 
 So yes, this website was vibecoded with love with antigravity and zola and typst. And be prepared for what is to come. 
