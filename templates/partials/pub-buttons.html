@@ -44,12 +44,7 @@ For external links, use full URLs e.g., https://example.com/paper.pdf
 {# Poster - Presentation board icon #}
 {% if pub.extra.poster_url %}
 {% set is_local = pub.extra.poster_url is starting_with("/") or pub.extra.poster_url is starting_with("files/") %}
-{% if is_local %}
-{% set poster_href = "/" ~ pub.extra.poster_url | trim_start_matches(pat="/") %}
-{% else %}
-{% set poster_href = pub.extra.poster_url %}
-{% endif %}
-<a href="{{ poster_href }}"
+<a href="{% if is_local %}{{ get_url(path=pub.extra.poster_url) }}{% else %}{{ pub.extra.poster_url }}{% endif %}"
    {% if not is_local %}target="_blank" rel="noopener"{% endif %}
    class="pub-btn pub-btn--poster" title="Poster">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
