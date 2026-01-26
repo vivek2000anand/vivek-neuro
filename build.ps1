@@ -20,11 +20,28 @@ $failed = 0
 
 foreach ($file in $files) {
     # Output goes to content.html in same directory
-    $output = $file.FullName -replace "\.typ$", ".html"
+
     
     try {
-        # Run Pandoc: typst -> html with MathJax math
-        $result = pandoc $file.FullName -f typst -t html --mathjax -o $output 2>&1
+        # Run Pandoc: typst -> html with MathJax math and citation processing
+        # Change directory to file location so relative paths (bibliography) work
+        Push-Location $file.DirectoryName
+        try {
+            $outputName = $file.Name -replace "\.typ$", ".html"
+            
+            # Check for bibliography file
+            $bibFile = Get-ChildItem -Filter "*.bib" | Select-Object -First 1
+            $bibArg = ""
+            if ($bibFile) {
+                $bibArg = "--bibliography=`"$($bibFile.Name)`""
+            }
+
+            $command = "pandoc $($file.Name) -f typst -t html --mathjax --citeproc $bibArg -o $outputName 2>&1"
+            $result = Invoke-Expression $command
+        }
+        finally {
+            Pop-Location
+        }
         
         if ($LASTEXITCODE -eq 0) {
             Write-Host "  [OK] $($file.Name)" -ForegroundColor Green

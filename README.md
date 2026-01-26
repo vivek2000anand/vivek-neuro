@@ -53,6 +53,17 @@ Edit `content/_index.md`:
 
 Or manually create `content/blog/my-post/index.md`.
 
+### Add Citations to Blog Post
+
+1. Create a `.bib` file in your post's directory (e.g., `refs.bib`).
+2. Add BibTeX entries.
+3. In your `content.typ`, link the bibliography:
+   ```typst
+   #bibliography("refs.bib")
+   ```
+4. Cite using `@key` (e.g., `@shepard1987`).
+5. Run `.\build.ps1` to generate with citations.
+
 ### Add/Update Publications
 
 1. **Edit `publications.bib`** with your entries:
