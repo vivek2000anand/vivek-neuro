@@ -5,7 +5,7 @@ template = "publication.html"
 
 [extra]
 authors = "Anand, Vivek, Helbling, Alec, Davenport, Mark A., Berman, Gordon J, Alagapan, Sankaraleengam, Rozell, Christopher J"
-venue = "ICLR 2026: International Conference on Learning Representations"
+venue = "International Conference on Learning Representations (ICLR)"
 entry_type = "inproceedings"
 cite_key = "anand2026lore"
 paper_url = "https://openreview.net/forum?id=QmgEUx2Cd7"
