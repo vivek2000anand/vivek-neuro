@@ -64,6 +64,18 @@ Or manually create `content/blog/my-post/index.md`.
 4. Cite using `@key` (e.g., `@shepard1987`).
 5. Run `.\build.ps1` to generate with citations.
 
+### Series Navigation (Next/Prev Buttons)
+
+To link posts in a series, add `series_prev` and/or `series_next` to the `[extra]` section of your post's `index.md`:
+
+```toml
+[extra]
+series_prev = { text = "Episode 1: Scales", link = "/blog/episode-1-scales" }
+series_next = { text = "Episode 3: Geometry", link = "/blog/episode-3-geometry" }
+```
+
+These buttons will appear at the top and bottom of the post.
+
 ### Add/Update Publications
 
 1. **Edit `publications.bib`** with your entries:

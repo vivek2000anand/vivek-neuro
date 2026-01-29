@@ -6,6 +6,8 @@
     - `build.ps1`: Build script to convert Typst to HTML via Pandoc
     - `templates/`: Zola HTML templates
     - `static/`: Static assets
+        - `files/`
+            - `csl/`: Citation Style Language files (e.g. `ieee.csl`)
     - `sass/`: SCSS styles
 
 ## Key Files

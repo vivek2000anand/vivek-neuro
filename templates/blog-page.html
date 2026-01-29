@@ -17,9 +17,49 @@
                 {% endif %}
             </div>
         </header>
+
+        {% if page.extra.series_prev or page.extra.series_next %}
+        <nav class="series-nav series-nav--top">
+            {% if page.extra.series_prev %}
+            <a href="{{ page.extra.series_prev.link }}" class="series-nav__link series-nav__link--prev">
+                <span class="series-nav__label">← Previous</span>
+                <span class="series-nav__title">{{ page.extra.series_prev.text }}</span>
+            </a>
+            {% else %}
+            <div></div> <!-- Spacer -->
+            {% endif %}
+
+            {% if page.extra.series_next %}
+            <a href="{{ page.extra.series_next.link }}" class="series-nav__link series-nav__link--next">
+                <span class="series-nav__label">Next →</span>
+                <span class="series-nav__title">{{ page.extra.series_next.text }}</span>
+            </a>
+            {% endif %}
+        </nav>
+        {% endif %}
         
         <div class="blog-post__content">
             {{ page.content | safe }}
         </div>
+
+        {% if page.extra.series_prev or page.extra.series_next %}
+        <nav class="series-nav series-nav--bottom">
+            {% if page.extra.series_prev %}
+            <a href="{{ page.extra.series_prev.link }}" class="series-nav__link series-nav__link--prev">
+                <span class="series-nav__label">← Previous</span>
+                <span class="series-nav__title">{{ page.extra.series_prev.text }}</span>
+            </a>
+            {% else %}
+            <div></div> <!-- Spacer -->
+            {% endif %}
+
+            {% if page.extra.series_next %}
+            <a href="{{ page.extra.series_next.link }}" class="series-nav__link series-nav__link--next">
+                <span class="series-nav__label">Next →</span>
+                <span class="series-nav__title">{{ page.extra.series_next.text }}</span>
+            </a>
+            {% endif %}
+        </nav>
+        {% endif %}
     </article>
 {% endblock %}
