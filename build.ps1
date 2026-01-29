@@ -34,6 +34,11 @@ foreach ($file in $files) {
             $bibArg = ""
             if ($bibFile) {
                 $bibArg = "--bibliography=`"$($bibFile.Name)`""
+                # Check for IEEE CSL file
+                $cslPath = Join-Path $PSScriptRoot "files/csl/ieee.csl"
+                if (Test-Path $cslPath) {
+                   $bibArg += " --csl=`"$cslPath`""
+                }
             }
 
             $command = "pandoc $($file.Name) -f typst -t html --mathjax --citeproc $bibArg -o $outputName 2>&1"

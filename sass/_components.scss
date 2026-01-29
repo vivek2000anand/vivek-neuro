@@ -738,3 +738,24 @@
   font-size: 0.7em;
   vertical-align: middle;
 }
+
+// ============ Citations (Pandoc/CSL) ============
+.csl-bib-body {
+  margin-top: $spacing-lg;
+  line-height: $line-height-relaxed;
+}
+
+.csl-entry {
+  display: flex;
+  margin-bottom: $spacing-sm;
+  
+  .csl-left-margin {
+    flex-shrink: 0;
+    // Ensure enough space for [10], [100] etc.
+    min-width: 2.5em; 
+  }
+  
+  .csl-right-inline {
+    flex: 1;
+  }
+}
