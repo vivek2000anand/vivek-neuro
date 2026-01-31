@@ -59,7 +59,7 @@ The resulting scale clearly had semantic sense must be viewed from the late 1920
 
 #figure(
   image("figures/thurstone_scale_seriousness.svg", width: 100%),
-  caption: [Learned Scale of Seriousness of Various Crimes @thurstone1927method],
+  caption: [Thurstone's Crowdsourced 1D Scale of Seriousness of Various Crimes (1927) @thurstone1927method],
 ) <fig:thurstone_scale>
 
 Serious crimes like Rape and Homicide are viewed as most immoral while minor crimes like Bootlegging (selling alcohol - this was prohibition mind you) and Vagrancy are viewed as least immoral. One could imagine that today, this scale could look very different.

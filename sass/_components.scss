@@ -145,7 +145,7 @@
 // ============ Blog Post ============
 .blog-post {
   &__header {
-    margin-bottom: $spacing-2xl;
+    margin-bottom: $spacing-sm;
   }
   
   &__title {
@@ -772,8 +772,9 @@
   
   &--top {
     margin-top: 0;
-    margin-bottom: $spacing-xl;
+    margin-bottom: $spacing-lg;
     border-top: none;
+    padding-top: 0;
   }
   
   &--bottom {
@@ -819,5 +820,39 @@
     color: var(--color-text-primary);
     transition: color $transition-fast;
     line-height: $line-height-tight;
+  }
+}
+
+// ============ Figures and Captions ============
+figure {
+  margin: $spacing-xl 0;
+  text-align: center;
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: $radius-md;
+    // Removed border to avoid "black space" around SVGs if transparent
+    // border: 1px solid var(--color-border); 
+    box-shadow: none;
+    background: transparent;
+  }
+}
+
+figcaption {
+  margin-top: $spacing-sm;
+  font-size: $font-size-sm;
+  color: var(--color-text-muted);
+  font-style: italic;
+  text-align: center;
+  
+  // Remove default margins from paragraphs inside captions
+  p {
+    margin: 0;
+  }
+  
+  // Style citations inside captions nicely
+  .citation {
+    font-style: normal;
   }
 }

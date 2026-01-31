@@ -41,7 +41,7 @@ foreach ($file in $files) {
                 }
             }
 
-            $command = "pandoc $($file.Name) -f typst -t html --mathjax --citeproc $bibArg -o $outputName 2>&1"
+            $command = "pandoc $($file.Name) -f typst -t html --mathjax --citeproc --metadata link-citations=true $bibArg -o $outputName 2>&1"
             $result = Invoke-Expression $command
         }
         finally {
