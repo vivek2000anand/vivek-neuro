@@ -57,7 +57,11 @@ In that study, Thurstone used the scale to evaluate the morality of 19 crimes to
 
 The resulting scale clearly had semantic sense must be viewed from the late 1920s moral perspective.
 
-[the thurstone scale figure]
+#figure(
+  image("figures/thurstone_scale_seriousness.svg", width: 100%),
+  caption: [Learned Scale of Seriousness of Various Crimes @thurstone1927method],
+) <fig:thurstone_scale>
+
 Serious crimes like Rape and Homicide are viewed as most immoral while minor crimes like Bootlegging (selling alcohol - this was prohibition mind you) and Vagrancy are viewed as least immoral. One could imagine that today, this scale could look very different.
 
 This method was revolutionary for its time and was used for a whole other set of scales to evaluate other psychological phenomena like handwriting and personality traits @thurstone1931measurement. 
