@@ -14,15 +14,19 @@ href="#ref-michell1999measurement" role="doc-biblioref">[1]</a></span>,
 psychology faced an immense pressure to be quantitative like Physics at
 that time was. Note that Einstein, Bohr and Planck were all
 revolutionizing the way we think about the physical world at that time.
-The main way they were doing this by coming with new measurement
-paradigms to model how people viewed the world. As Michell points out in
-his book, psychology as a field was not viewed with much respect by the
+The main way they were doing this by coming with new theories but with
+objective ways of measuring the phenomena. As Michell points out in his
+book, psychology as a field was not viewed with much respect by the
 scientific community and the community eminently felt a need to be more
-quantitative to earn legitimacy. This is not withstanding the fact that
-the Ferguson report commissioned by the British Association for the
-Advancement of Science that finished in 1940, concluded that there is no
-real way to perform psychological measurement thereby eviscerating the
-very foundation of psychology as a science - at least at the time.</p>
+quantitative to earn legitimacy.</p>
+<p>This is not withstanding the fact that the Ferguson report <span
+class="citation" data-cites="ferguson1940quantitative"><a
+href="#ref-ferguson1940quantitative"
+role="doc-biblioref">[2]</a></span>, commissioned by the British
+Association for the Advancement of Science that finished in 1940,
+concluded that there is no real way to perform psychological measurement
+thereby eviscerating the very foundation of psychology as a science - at
+least at the time.</p>
 <h2>Why is similarity needed? And why not absolute values?</h2>
 <p>The main reason for this evisceration was largely due to the fact
 that psychology did not have a ground truth to measure against. The
@@ -35,41 +39,50 @@ a physical correlate like sound does. For example, the beauty of a
 painting? How do measure the beauty of a painting with an absolute
 scale? You cannot - at least not in a way that is objective and can be
 agreed upon by everyone.</p>
-<p>[TODO: Have a figure on ruler and the absolute scale but no absolute
-scale for a psychological concept]</p>
 <p>In the midst of this crisis of the field, L.L. Thurstone in his 1927
 paper, A Law of Comparative Judgement <span class="citation"
 data-cites="thurstone2017law"><a href="#ref-thurstone2017law"
-role="doc-biblioref">[2]</a></span> proposed a new way to perform
-psychological measurement [ignore the year on the citation as I am not
-able to find the original 1927 bib entry] argued that while we as humans
-may not have an absolute scale, we possess a high sensitive comparison
-mechanism to compare any two stimuli via a relative scale.</p>
-<p>That is, we are not very good at saying “This light is at 400 lumens”
-but we are very good at saying “Light A is brighter than Light B”. The
-idea that humans are more consistent in their relative judgements than
+role="doc-biblioref">[3]</a></span> proposed a new way to perform
+psychological measurement. He argued that while we as humans may not
+have an absolute scale, we possess a high sensitive comparison mechanism
+to compare any two stimuli via a relative scale.</p>
+<p>That is, we are not very good at saying “This sound is at 400 dB” but
+we are very good at saying “Sound A is louder than Sound B”. The idea
+that humans are more consistent in their relative judgements than
 absolute judgements has been replicated repeatedly since then <span
 class="citation" data-cites="stewart2005absolute"><a
-href="#ref-stewart2005absolute" role="doc-biblioref">[3]</a></span>.</p>
+href="#ref-stewart2005absolute" role="doc-biblioref">[4]</a></span>.</p>
+<figure>
+<p><img src="figures/absolute_vs_relative_scales.svg"
+style="width:100.0%" /></p>
+<figcaption><p>Absolute vs Relative Scales. Human perception does not
+have an absolute scale to measure against like physical concepts like
+length or weight. However, humans possess a high sensitive comparison
+mechanism to compare any two stimuli via a relative
+scale.</p></figcaption>
+</figure>
+<p><span id="fig:absolute_vs_relative_scales"></span></p>
 <h2>Scales: The 1D Era</h2>
 <p>While relative judgements allow one to get around the fact that there
 exists no absolute scale to measure against, it still doesn’t allow one
 to account for the fact that humans are highly inconsistent in comparing
 stimuli due to factors like attention, fatigue etc.</p>
-<p>The way that Thurstone was able to explain this is via assuming that
-this internal noise could be modelled as a Gaussian Process. More
-formally, if two light stimuli <span
+<p>The way that Thurstone was able to explain human inconsistency is via
+assuming that internal noise could be modelled as a Gaussian
+Distribution and that each time an individual made a judgement about a
+particular stimuli, that judgement was a draw from that distribution.
+More formally, if two sound stimuli <span
 class="math inline">\(\mu_{A}\)</span> and <span
 class="math inline">\(\mu_{B}\)</span> are presented to an individual
-where the perceived brightness is sampled from <span
+where the perceived loudness is sampled from <span
 class="math inline">\(N\left( \mu_{A},\sigma^{2} \right)\)</span> and
 <span class="math inline">\(N\left( \mu_{B},\sigma^{2}
 \right)\)</span>.</p>
 <p>This way, each time the individual is presented with the same two
-stimuli, that individual is essentially using one draw from each of the
-two Gaussian distributions to compare them.</p>
-<p>Now, to model if the individual perceives stimulus <span
-class="math inline">\(A\)</span> as brighter than stimulus <span
+stimuli, the individual essentially draws from each of the two Gaussian
+distributions to compare them the resulting samples.</p>
+<p>To model if the individual perceives stimulus <span
+class="math inline">\(A\)</span> as louder than stimulus <span
 class="math inline">\(B\)</span>, we can compute the difference between
 the two draws, <span class="math inline">\(\delta = x_{A} -
 x_{B}\)</span>.</p>
@@ -81,19 +94,27 @@ brighter than stimulus <span class="math inline">\(B\)</span>.</p></li>
 individual perceives stimulus <span class="math inline">\(B\)</span> as
 brighter than stimulus <span class="math inline">\(A\)</span>.</p></li>
 </ul>
-<p>Consider two sets of stimuli. The first is between the sun and a
-lightbulb where the human assesses on all trials that the sun is
-brighter than the lightbulb. The second is between a lightbulb and a
-candle where the human assesses that the lightbulb is brighter than the
-candle only about 75% of the time. What this essentially tells you is
-that the brightness of the sun is very far from the brightness of the
-lightbulb, while the brightness of the lightbulb is closer to the
-brightness of the candle.</p>
-<p>[Have a figure here showing the relative distances between the sun,
-lightbulb and candle]</p>
+<p>Consider a thought experiment with two sets of stimuli. The first is
+between a whisper and a bomb blast where the human assesses on all
+trials that the bomb blast is louder than the whisper. The second is
+between a bomb blast and a gun firing where the human assesses that the
+bomb blast is louder than the gun firing only about 80% of the time.
+What this essentially tells you is that the loudness of the bomb blast
+is very far from the loudness of the whisper, while the loudness of the
+bomb blast is closer to the loudness of the gun firing.</p>
+<figure>
+<p><img src="figures/sound_perception.svg" style="width:100.0%" /></p>
+<figcaption><p>A whisper and a bomb blast are perceived as very
+different in loudness, while a bomb blast and a gun firing are perceived
+as less different in loudness due to increase in confusion between the
+stimuli.</p></figcaption>
+</figure>
+<p><span id="fig:sound_perception"></span></p>
 <p>To formalize this, note that the difference between gaussian
-distributions is also gaussian. Therefore, the percentage of times that
-the individual perceives stimulus A as different from stimulus B is
+distributions is also gaussian <span class="citation"
+data-cites="weisstein_normal_diff"><a href="#ref-weisstein_normal_diff"
+role="doc-biblioref">[5]</a></span>. Therefore, the percentage of times
+that the individual perceives stimulus A as different from stimulus B is
 related to the distance between the two stimuli.</p>
 <p>For example, if <span class="math inline">\(P(A &gt; B) =
 0.5\)</span>, then the distance between the means <span
@@ -106,84 +127,92 @@ between the means is 2 standard deviations.</p>
 <p>If these numbers seem familiar, it is because they are essentially
 the same numbers that you would see in a standard normal distribution
 table. Basically, the Inverse Cumulative Distribution Function (CDF) or
-the Z-score function evaluated on the probability of A being greater
-than B gives you the distance between the means in terms of standard
-deviations.</p>
-<p>Or</p>
-<p><span class="math display">\[d(A,B) = Z\left( P(A &gt; B)
-\right)\]</span></p>
+the Z-score function (<span class="math inline">\(Z\left( .
+\right)\)</span>) evaluated on the probability of A being greater than B
+gives you the distance between the means in terms of standard
+deviations. Essentially you assume that <span
+class="math inline">\(D_{AB} = Z\left( P(A &gt; B) \right)\)</span>.</p>
 <p>With this technique, Thurstone essentially was able to derive a
 quantitative scale for measuring the difference between two stimuli
 based on the relative judgements. He turned the natural human error in
-judgement into a feature of the measurement scale. (He also described
-similar methods for cases where the standard deviation of the internal
-noise was not constant across stimuli but the same idea holds)</p>
+judgement into a feature of the measurement scale. (His paper
+additionally described formulae for cases where the standard deviation
+of the internal noise was not constant across stimuli. However, the same
+idea holds.)</p>
 <p>But wait, we just have a collection of pairwise distances? How do we
 go from that to a scale? I know that all of you folks are thinking about
 Multidimensional Scaling (MDS) here. But that was created only in late
 1950s and early 1960s so Thurstone couldn’t have used it. And also, this
-is only a One Dimensional Scale so MDS is overkill.</p>
+is only a One Dimensional Scale so MDS is overkill when something far
+simpler would suffice.</p>
 <p>The algorithm is actually pretty simple. They created a pairwise
-distance matrix <span class="math inline">\(D\)</span> where <span
-class="math inline">\(D_{ij}\)</span> is the distance (Z-score) between
-stimulus <span class="math inline">\(i\)</span> and stimulus <span
-class="math inline">\(j\)</span> after aggregating over all of the data.
-Then, to find the scale they just averaged over the columns of <span
-class="math inline">\(D\)</span> to get a single value for each
-stimulus. This is akin to taking a “centroid” of the stimulus by
-comparing its relative score and distance to all other stimuli. Then, if
-you sort the stimuli based on this centroid, you get the scale.</p>
-<p>[TODO: Add a figure here showing the pairwise distance matrix and the
-centroid]</p>
+distance matrix <span class="math inline">\(\mathbf{D}\)</span> where
+<span class="math inline">\(D_{ij}\)</span> is the distance (Z-score)
+between stimulus <span class="math inline">\(i\)</span> and stimulus
+<span class="math inline">\(j\)</span> after aggregating over all of the
+data. Then, to find the scale they just averaged over the columns of
+<span class="math inline">\(\mathbf{D}\)</span> to get a single value
+for each stimulus. This is akin to taking a “centroid” of the stimulus
+by comparing its relative score and distance to all other stimuli. Then,
+if you sort the stimuli based on this centroid, you get the scale.</p>
+<figure>
+<p><img src="figures/centroid_figure.svg" style="width:100.0%" /></p>
+<figcaption><p>Making the distance matrix from the the Z scored pairwise
+probabilities and then averaging over the columns to get the scale for
+each stimulus.</p></figcaption>
+</figure>
+<p><span id="fig:centroid_figure"></span></p>
 <h2>Using the 1D scale to evaluate morality</h2>
 <p>With this theoretical framework, Thurstone operationalized it to
 learn scales for a variety of psychological phenomena but most famously
 known for evaluating morality of various crimes <span class="citation"
 data-cites="thurstone1927method"><a href="#ref-thurstone1927method"
-role="doc-biblioref">[4]</a></span>.</p>
-<p>In that study, Thurstone used the scale to evaluate the morality of
-19 crimes to see if there was a scale that could capture the moral
-judgments of individuals. He asked a total of 266 participants to
-compare every pair of crimes (171 in total) and used the entire
+role="doc-biblioref">[6]</a></span>.</p>
+<p>In that study, Thurstone used the scale to evaluate the public’s
+perception of morality for 19 crimes to build a scale that could capture
+the moral judgments of individuals. He asked a total of 266 participants
+to compare every pair of crimes (171 in total) and used the entire
 aggregated data to learn the scale.</p>
-<p>The resulting scale clearly had semantic sense must be viewed from
-the late 1920s moral perspective.</p>
+<p>The resulting scale clearly had semantic sense but must be viewed
+from the late 1920s moral perspective.</p>
 <figure>
 <p><img src="figures/thurstone_scale_seriousness.svg"
 style="width:100.0%" /></p>
 <figcaption><p>Thurstone’s Crowdsourced 1D Scale of Seriousness of
 Various Crimes (1927) <span class="citation"
 data-cites="thurstone1927method"><a href="#ref-thurstone1927method"
-role="doc-biblioref">[4]</a></span></p></figcaption>
+role="doc-biblioref">[6]</a></span></p></figcaption>
 </figure>
 <p><span id="fig:thurstone_scale"></span></p>
 <p>Serious crimes like Rape and Homicide are viewed as most immoral
 while minor crimes like Bootlegging (selling alcohol - this was
 prohibition mind you) and Vagrancy are viewed as least immoral. One
 could imagine that today, this scale could look very different.</p>
-<p>This method was revolutionary for its time and was used for a whole
-other set of scales to evaluate other psychological phenomena like
-handwriting and personality traits <span class="citation"
+<p>This method was revolutionary for its time being able to
+quantitatively model something as complex as morality without making
+assumptions about which crime was worse than another. Additionally, It
+was used for a whole other set of scales to evaluate other psychological
+phenomena like handwriting and personality traits <span class="citation"
 data-cites="thurstone1931measurement"><a
 href="#ref-thurstone1931measurement"
-role="doc-biblioref">[5]</a></span>.</p>
+role="doc-biblioref">[7]</a></span>.</p>
 <h2>Limitations of the 1D scale</h2>
 <p>However, there were definitely a few issues with this method.</p>
 <ol>
-<li><p>The scale is unidimensional. For example, in the followin
-example, it is not clear how one would compare the chocolate cake to
-chocolate croissant or the pound cake in terms of taste? Do you compare
-on the texture (cakeness) or to the taste (chocalatiness)? Thurstone’s
-1D method assumes that if people are confused between two items it is
-because they are identical on the single dimension being measured.
-Clearly this is not the case for this example. You lose out on this
-nuance in the 1D scale.</p></li>
-<li><p>Intransitivity: Thurstone’s method also assumes that if <span
-class="math inline">\(A &gt; B\)</span> and <span
+<li><p><strong>The scale is unidimensional</strong>: For example, in the
+following example, it is not clear how one would compare the chocolate
+cake to chocolate croissant or the pound cake in terms of taste? Do you
+compare on the texture (cakeness) or to the taste (chocolatiness)?
+Thurstone’s 1D method assumes that if people are confused between two
+items it is because they are identical on the single dimension being
+measured. Clearly this is not the case for this example. You lose out on
+this nuance in the 1D scale.</p></li>
+<li><p><strong>Intransitivity</strong>: Thurstone’s method also assumes
+that if <span class="math inline">\(A &gt; B\)</span> and <span
 class="math inline">\(B &gt; C\)</span> then <span
 class="math inline">\(A\)</span> must be greater than <span
 class="math inline">\(C\)</span>. For example, if one were to evaluate
-on the chocalatiness axis then the order would likely be Chocolate Cake
+on the chocolatiness axis then the order would likely be Chocolate Cake
 &gt; Chocolate Croissant &gt; Pound Cake. However, if one were to
 evaluate on the cakeness axis then the order would be Pound Cake &gt;
 Chocolate Cake &gt; Chocolate Croissant. A participant may invariably
@@ -191,18 +220,20 @@ choose to evaluate on one axis for one query (Chocolate cake vs
 Chocolate croissant on chocolatiness) but not for another (Pound cake vs
 Chocolate cake on cakeness). This subtlety is lost in the 1D
 scale.</p></li>
-<li><p>Needing to collect all the pairwise judgements is very time
-consuming and not scalable: In terms of sample complexity, this is <span
-class="math inline">\(O\left( N^{2} \right)\)</span> where <span
-class="math inline">\(N\)</span> is the number of stimuli. This scales
-quite poorly with the number of stimuli and quickly becomes infeasible
-in human data collection. For 25 stimuli this is 625 comparisons, but
-for 50 one would need to collect 2500 comparisons! Good luck with
-that.</p></li>
+<li><p><strong>Lack of Scalability</strong>: In terms of sample
+complexity, this is <span class="math inline">\(O\left( N^{2}
+\right)\)</span> where <span class="math inline">\(N\)</span> is the
+number of stimuli. This scales quite poorly with the number of stimuli
+and quickly becomes infeasible in human data collection. Thurstone
+managed to get 266 participants to do 171 comparisons each. That in
+itself is a feat especially for 1927! For 25 stimuli this would 625
+comparisons and for 50 one would need to collect 2500 comparisons! Good
+luck with that.</p></li>
 </ol>
 <p>Next time, we will introduce a method that adds dimensions to
 Thurstone’s scale and addresses some of these issues (while amplifying
 some of the others!).</p>
+<h2 class="unnumbered">References</h2>
 <div id="refs" class="references csl-bib-body" data-entry-spacing="0"
 role="list">
 <div id="ref-michell1999measurement" class="csl-entry" role="listitem">
@@ -211,26 +242,41 @@ Michell, <em>Measurement in psychology: A critical history of a
 methodological concept</em>, vol. 53. Cambridge University Press,
 1999.</div>
 </div>
+<div id="ref-ferguson1940quantitative" class="csl-entry"
+role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">A.
+Ferguson <em>et al.</em>, <span>“Quantitative estimates of sensory
+events: Final report of the committee appointed to consider and report
+upon the possibility of quantitative estimates of sensory
+events,”</span> <em>Advancement of Science</em>, vol. 2, pp. 331–349,
+1940.</div>
+</div>
 <div id="ref-thurstone2017law" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">L.
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">L.
 L. Thurstone, <span>“A law of comparative judgment,”</span> in
 <em>Scaling</em>, Routledge, 2017, pp. 81–92.</div>
 </div>
 <div id="ref-stewart2005absolute" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">N.
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">N.
 Stewart, G. D. Brown, and N. Chater, <span>“Absolute identification by
 relative judgment.”</span> <em>Psychological review</em>, vol. 112, no.
 4, p. 881, 2005.</div>
 </div>
+<div id="ref-weisstein_normal_diff" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">E.
+W. Weisstein, <span>“Normal difference distribution.”</span> From
+MathWorld–A Wolfram Resource. Available: <a
+href="https://mathworld.wolfram.com/NormalDifferenceDistribution.html">https://mathworld.wolfram.com/NormalDifferenceDistribution.html</a></div>
+</div>
 <div id="ref-thurstone1927method" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline">L.
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">L.
 L. Thurstone, <span>“The method of paired comparisons for social
 values.”</span> <em>The Journal of Abnormal and Social Psychology</em>,
 vol. 21, no. 4, p. 384, 1927.</div>
 </div>
 <div id="ref-thurstone1931measurement" class="csl-entry"
 role="listitem">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline">L.
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">L.
 L. Thurstone, <span>“The measurement of social attitudes.”</span>
 <em>The journal of abnormal and social psychology</em>, vol. 26, no. 3,
 p. 249, 1931.</div>
