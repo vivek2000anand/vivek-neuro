@@ -1,51 +1,55 @@
 <p>This is episode 1 in series of blog posts that seek to explain how
-the representation became a powerful tool in psychology and cognitive
-neuroscience from the early 20th century to the present day. The first
-episode focusses on the dire straits the field found itself in in the
-early 20th century and novel quantitative paradigm that allowed the
-field to objectively quantify psychological phenomena (perhaps for the
-first time!).</p>
+mental representations became a powerful tool in psychology and
+cognitive neuroscience from the early 20th century to the present day.
+This episode focusses on the dire straits the field found itself in in
+the early 20th century and the novel quantitative paradigm that allowed
+the field to objectively quantify psychological phenomena (perhaps for
+the first time!).</p>
 <h2>The Crisis of Confidence</h2>
 <p>In the early 20th century, psychology was facing a crisis of
-confidence. As Joel Michell pointed out in his very well written
-Measurement in Psychology <span class="citation"
+confidence. As Joel Michell pointed out in his very well written 1999
+book, Measurement in Psychology <span class="citation"
 data-cites="michell1999measurement"><a
 href="#ref-michell1999measurement" role="doc-biblioref">[1]</a></span>,
-psychology faced an immense pressure to be quantitative like Physics at
-that time was. Note that Einstein, Bohr and Planck were all
+psychology faced an immense pressure to be quantitative like Physics was
+at that time was. Note that Einstein, Bohr and Planck were all
 revolutionizing the way we think about the physical world at that time.
 The main way they were doing this by coming with new theories but with
-objective ways of measuring the phenomena. As Michell points out in his
-book, psychology as a field was not viewed with much respect by the
-scientific community and the community eminently felt a need to be more
-quantitative to earn legitimacy.</p>
-<p>This is not withstanding the fact that the Ferguson report <span
-class="citation" data-cites="ferguson1940quantitative"><a
+objective ways of to the phenomena. As Michell points out in his book,
+psychology as a field was not viewed with much respect by the scientific
+community felt a critical need to be more quantitative to earn
+legitimacy.</p>
+<p>This is notwithstanding the fact that later in the century, the
+Ferguson report <span class="citation"
+data-cites="ferguson1940quantitative"><a
 href="#ref-ferguson1940quantitative"
 role="doc-biblioref">[2]</a></span>, commissioned by the British
-Association for the Advancement of Science that finished in 1940,
-concluded that there is no real way to perform psychological measurement
-thereby eviscerating the very foundation of psychology as a science - at
-least at the time.</p>
+Association for the Advancement of Science released in 1940, concluded
+that there is no real way to perform psychological measurement thereby
+eviscerating the very foundation of psychology as a science - at least
+at the time.</p>
 <h2>Why is similarity needed? And why not absolute values?</h2>
 <p>The main reason for this evisceration was largely due to the fact
 that psychology did not have a ground truth to measure against. The
-canonical example from physics is that of length. There exists an
-absolute length of a ruler and of the standard measurement units for
-length. However, in psychology, there is no rule or scale to measure the
-perception of loudness to a sound perceived by an individual.</p>
+canonical example of “ground truth” from physics is that of length.
+There exists an absolute length of a ruler and of the standard
+measurement units (meters) for length. However, in psychology, there is
+no rule or scale to measure the perception of loudness of a sound
+perceived by an individual even if there are objective measures of
+loudness (decibels).</p>
 <p>This becomes even harder when you consider concepts that do not have
-a physical correlate like sound does. For example, the beauty of a
-painting? How do measure the beauty of a painting with an absolute
+a physical correlate like sound does. For example, aesthetic appeal of a
+painting. How do you measure the beauty of a painting using an absolute
 scale? You cannot - at least not in a way that is objective and can be
 agreed upon by everyone.</p>
-<p>In the midst of this crisis of the field, L.L. Thurstone in his 1927
-paper, A Law of Comparative Judgement <span class="citation"
-data-cites="thurstone2017law"><a href="#ref-thurstone2017law"
-role="doc-biblioref">[3]</a></span> proposed a new way to perform
-psychological measurement. He argued that while we as humans may not
-have an absolute scale, we possess a high sensitive comparison mechanism
-to compare any two stimuli via a relative scale.</p>
+<p>In the midst of this measurement crisis for psychology, L.L.
+Thurstone in his 1927 paper, A Law of Comparative Judgement <span
+class="citation" data-cites="thurstone2017law"><a
+href="#ref-thurstone2017law" role="doc-biblioref">[3]</a></span>
+proposed a new way to perform psychological measurement. He argued that
+while we as humans may not have an absolute scale, we possess a highly
+sensitive comparison mechanism to compare any two stimuli via a relative
+scale.</p>
 <p>That is, we are not very good at saying “This sound is at 400 dB” but
 we are very good at saying “Sound A is louder than Sound B”. The idea
 that humans are more consistent in their relative judgements than
@@ -76,11 +80,13 @@ class="math inline">\(\mu_{A}\)</span> and <span
 class="math inline">\(\mu_{B}\)</span> are presented to an individual
 where the perceived loudness is sampled from <span
 class="math inline">\(N\left( \mu_{A},\sigma^{2} \right)\)</span> and
-<span class="math inline">\(N\left( \mu_{B},\sigma^{2}
-\right)\)</span>.</p>
+<span class="math inline">\(N\left( \mu_{B},\sigma^{2} \right)\)</span>
+independently where <span class="math inline">\(x_{A}\)</span> and <span
+class="math inline">\(x_{B}\)</span> are the samples from the respective
+distributions.</p>
 <p>This way, each time the individual is presented with the same two
 stimuli, the individual essentially draws from each of the two Gaussian
-distributions to compare them the resulting samples.</p>
+distributions to compare the resulting samples.</p>
 <p>To model if the individual perceives stimulus <span
 class="math inline">\(A\)</span> as louder than stimulus <span
 class="math inline">\(B\)</span>, we can compute the difference between
@@ -89,19 +95,20 @@ x_{B}\)</span>.</p>
 <ul>
 <li><p>If <span class="math inline">\(\delta &gt; 0\)</span>, the
 individual perceives stimulus <span class="math inline">\(A\)</span> as
-brighter than stimulus <span class="math inline">\(B\)</span>.</p></li>
+louder than stimulus <span class="math inline">\(B\)</span>.</p></li>
 <li><p>If <span class="math inline">\(\delta &lt; 0\)</span>, the
 individual perceives stimulus <span class="math inline">\(B\)</span> as
-brighter than stimulus <span class="math inline">\(A\)</span>.</p></li>
+louder than stimulus <span class="math inline">\(A\)</span>.</p></li>
 </ul>
-<p>Consider a thought experiment with two sets of stimuli. The first is
-between a whisper and a bomb blast where the human assesses on all
-trials that the bomb blast is louder than the whisper. The second is
-between a bomb blast and a gun firing where the human assesses that the
-bomb blast is louder than the gun firing only about 80% of the time.
-What this essentially tells you is that the loudness of the bomb blast
-is very far from the loudness of the whisper, while the loudness of the
-bomb blast is closer to the loudness of the gun firing.</p>
+<p>Consider a thought experiment with two sets of stimuli. The first
+comparison is between a whisper and a bomb blast where the human
+assesses on all trials that the bomb blast is louder than the whisper.
+The second is between a bomb blast and a gun firing where the human
+assesses that the bomb blast is louder than the gun firing only about
+80% of the time. What this essentially tells you is that the loudness of
+the bomb blast is very far from the loudness of the whisper, while the
+loudness of the bomb blast is closer to the loudness of the gun
+firing.</p>
 <figure>
 <p><img src="figures/sound_perception.svg" style="width:100.0%" /></p>
 <figcaption><p>A whisper and a bomb blast are perceived as very
@@ -140,11 +147,11 @@ additionally described formulae for cases where the standard deviation
 of the internal noise was not constant across stimuli. However, the same
 idea holds.)</p>
 <p>But wait, we just have a collection of pairwise distances? How do we
-go from that to a scale? I know that all of you folks are thinking about
-Multidimensional Scaling (MDS) here. But that was created only in late
-1950s and early 1960s so Thurstone couldn’t have used it. And also, this
-is only a One Dimensional Scale so MDS is overkill when something far
-simpler would suffice.</p>
+go from that to a scale? You might be thinking of Multidimensional
+Scaling (MDS) here. But that was created only in late 1950s and early
+1960s so Thurstone couldn’t have used it (We will go in detail about MDS
+in a future episode). And also, this is only a One Dimensional Scale so
+MDS is overkill when something far simpler would suffice.</p>
 <p>The algorithm is actually pretty simple. They created a pairwise
 distance matrix <span class="math inline">\(\mathbf{D}\)</span> where
 <span class="math inline">\(D_{ij}\)</span> is the distance (Z-score)
@@ -153,8 +160,11 @@ between stimulus <span class="math inline">\(i\)</span> and stimulus
 data. Then, to find the scale they just averaged over the columns of
 <span class="math inline">\(\mathbf{D}\)</span> to get a single value
 for each stimulus. This is akin to taking a “centroid” of the stimulus
-by comparing its relative score and distance to all other stimuli. Then,
-if you sort the stimuli based on this centroid, you get the scale.</p>
+by comparing its relative score and distance to all other stimuli. By
+averaging how much ‘better” or ‘worse” a crime is compared to every
+other crime in the set, we find its unique coordinate on the moral map.
+Then, if you sort the stimuli based on this centroid, you get the
+scale.</p>
 <figure>
 <p><img src="figures/centroid_figure.svg" style="width:100.0%" /></p>
 <figcaption><p>Making the distance matrix from the the Z scored pairwise
@@ -186,7 +196,7 @@ role="doc-biblioref">[6]</a></span></p></figcaption>
 <p><span id="fig:thurstone_scale"></span></p>
 <p>Serious crimes like Rape and Homicide are viewed as most immoral
 while minor crimes like Bootlegging (selling alcohol - this was
-prohibition mind you) and Vagrancy are viewed as least immoral. One
+Prohibition mind you) and Vagrancy are viewed as least immoral. One
 could imagine that today, this scale could look very different.</p>
 <p>This method was revolutionary for its time being able to
 quantitatively model something as complex as morality without making
@@ -199,14 +209,14 @@ role="doc-biblioref">[7]</a></span>.</p>
 <h2>Limitations of the 1D scale</h2>
 <p>However, there were definitely a few issues with this method.</p>
 <ol>
-<li><p><strong>The scale is unidimensional</strong>: For example, in the
-following example, it is not clear how one would compare the chocolate
-cake to chocolate croissant or the pound cake in terms of taste? Do you
-compare on the texture (cakeness) or to the taste (chocolatiness)?
-Thurstone’s 1D method assumes that if people are confused between two
-items it is because they are identical on the single dimension being
-measured. Clearly this is not the case for this example. You lose out on
-this nuance in the 1D scale.</p></li>
+<li><p><strong>The scale is unidimensional</strong>: Take the following
+example: it is not clear how one would compare the chocolate cake to
+chocolate croissant or the pound cake in terms of taste? Do you compare
+on the texture (cakeness) or to the taste (chocolatiness)? Thurstone’s
+1D method assumes that if people are confused between two items it is
+because they are identical on the single dimension being measured.
+Clearly this is not the case for this example. You lose out on this
+nuance in the 1D scale.</p></li>
 <li><p><strong>Intransitivity</strong>: Thurstone’s method also assumes
 that if <span class="math inline">\(A &gt; B\)</span> and <span
 class="math inline">\(B &gt; C\)</span> then <span
@@ -230,9 +240,13 @@ itself is a feat especially for 1927! For 25 stimuli this would 625
 comparisons and for 50 one would need to collect 2500 comparisons! Good
 luck with that.</p></li>
 </ol>
-<p>Next time, we will introduce a method that adds dimensions to
-Thurstone’s scale and addresses some of these issues (while amplifying
-some of the others!).</p>
+<h2>Coming Up Next….</h2>
+<p>Thurstone gave us the psychological ruler, but he kept us trapped on
+a single line. In the next episode, we’ll see how researchers finally
+“broke out” of the first dimension and developed methods to build
+multidimensional psychological spaces. Episode 2 of From Scales to
+Spaces is titled “From Ruler to Map” and will be released next.</p>
+<p>Stay tuned!</p>
 <h2 class="unnumbered">References</h2>
 <div id="refs" class="references csl-bib-body" data-entry-spacing="0"
 role="list">
