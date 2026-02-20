@@ -42,6 +42,14 @@
             {{ page.content | safe }}
         </div>
 
+        {% if page.extra.citation %}
+        <section class="blog-post__citation">
+            <h2 id="citation">Citation</h2>
+            <p>If you found this post helpful, please consider citing it:</p>
+            <pre><code>{{ page.extra.citation }}</code></pre>
+        </section>
+        {% endif %}
+
         {% if page.extra.series_prev or page.extra.series_next %}
         <nav class="series-nav series-nav--bottom">
             {% if page.extra.series_prev %}
