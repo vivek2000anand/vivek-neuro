@@ -4,9 +4,9 @@
 Based on our ICLR 2026 paper: #link("https://arxiv.org/abs/2602.04192")["LORE: Jointly Learning The Intrinsic Dimensionality and Relative Similarity Structure from Ordinal Data"]
 
 == Introduction
-Measuring and mapping human perception quantitatively is hard. If you want to measure physical distance, you use a ruler. But if you want to measure how "sweet" a cake is, or how "aesthetic" a painting is, no absolute ruler exists.
+Measuring and mapping human perception quantitatively is hard. If you want to measure physical distance, you use a ruler. But if you want to measure how "sweet" a cake is, or how "aesthetic" a painting is, no absolute physical ruler exists.
 
-Historically, researchers relied on absolute queries, like asking subjects to rate a stimulus on a 1-5 Likert scale. But absolute scales are fundamentally flawed: my "moderately sweet" might be your "cloyingly sweet". Moreover, humans are quite inconsistent in their absolute judgments giving very different answers to the same questions at different times @stewart2005absolute. To get around the lack of an absolute ruler, early psychophysics @thurstone2017law @thurstone1931measurement @thurstone1931measurement and later, machine learning @shepard1962analysis1 @tamuzAdaptivelyLearningCrowd2011 @terada2014local, leveraged relative queries that ask subjects to compare stimuli with each other instead of rating them on an absolute scale. (Check out #link("https://vivek-anand.xyz/blog/from-scales-to-spaces-episode-1-building-the-psychological-ruler/")[this] blog post for more details on how relative queries allowed psychophysics to escape the absolute ruler.) However, converting these relative judgements into a latent geometry is non-trivial.
+Historically, researchers relied on absolute queries, like asking subjects to rate a stimulus on a 1-5 Likert scale. But absolute scales are fundamentally flawed: my "moderately sweet" might be your "cloyingly sweet". Moreover, humans are quite inconsistent in their absolute judgments giving very different answers to the same questions at different times @stewart2005absolute. To get around the lack of an absolute ruler, early psychophysics @thurstone2017law @thurstone1931measurement @thurstone1931measurement and later, machine learning @shepard1962analysis1 @tamuzAdaptivelyLearningCrowd2011 @terada2014local leveraged relative queries. These ask subjects to compare stimuli against each other (e.g., "Is stimulus A more similar to B than to C?") instead of rating them in a vacuum. (Check out #link("https://vivek-anand.xyz/blog/from-scales-to-spaces-episode-1-building-the-psychological-ruler/")[this] blog post for more details on how relative queries allowed psychophysics to escape the absolute ruler.) However, converting these relative judgements into a latent geometry is non-trivial.
 
 The field developed Multidimensional Scaling (MDS) algorithms @kruskal1964multidimensional (which give you exact solutions but require the entire pairwise distance matrix) and Ordinal Embedding algorithms (OEs) @agarwal2007generalized @tamuzAdaptivelyLearningCrowd2011 @terada2014local (which are much more data efficient but are nonconvex with little guarantees). These methods allowed researchers to build multidimensional perceptual _maps_ instead of just rulers. from relative queries of the form "Is stimulus A more similar to B than to C?".
 
@@ -77,12 +77,12 @@ But the most exciting results came from real, noisy human data, including the Fo
         [*Method*], [*Test Acc.*], [*Rank*], [*Time (s)*],
       ),
       table.hline(stroke: 2pt + black),
-      [*LORE* \ (Ours)], [$82.45$  $plus.minus 0.27$], [*$3.3$*  *$plus.minus 0.47$*], [$6.64$  $plus.minus 3.90$],
-      [*SOE*], [$82.34$  $plus.minus 0.32$], [$15$  $plus.minus 0.00$], [$27.09$  $plus.minus 1.38$],
-      [*FORTE*], [$81.73$  $plus.minus 0.46$], [$15$  $plus.minus 0.00$], [$6.34$  $plus.minus 0.52$],
-      [*t-STE*], [$82.79$  $plus.minus 0.24$], [$15$  $plus.minus 0.00$], [$40.93$  $plus.minus 20.14$],
-      [*CKL*], [$82.75$  $plus.minus 0.20$], [$15$  $plus.minus 0.00$], [$18.41$  $plus.minus 7.89$],
-      [*Dim-CV*], [$77.67$  $plus.minus 0.02$], [$1.47$  $plus.minus 0.51$], [$1721.9$  $plus.minus 26.71$],
+      [*LORE* \ (Ours)], text(fill: rgb(128, 128, 128))[$82.45$  $plus.minus$ $0.27$], [*$3.3$*  *$plus.minus$ $0.47$*], text(fill: rgb(128, 128, 128))[$6.64$  $plus.minus$ $3.90$],
+      [*SOE*], text(fill: rgb(128, 128, 128))[$82.34$  $plus.minus$ $0.32$], text(fill: rgb(128, 128, 128))[$15$  $plus.minus$ $0.00$], text(fill: rgb(128, 128, 128))[$27.09$  $plus.minus$ $1.38$],
+      [*FORTE*], text(fill: rgb(128, 128, 128))[$81.73$  $plus.minus$ $0.46$], text(fill: rgb(128, 128, 128))[$15$  $plus.minus$ $0.00$], text(fill: rgb(128, 128, 128))[$6.34$  $plus.minus$ $0.52$],
+      [*t-STE*], text(fill: rgb(128, 128, 128))[$82.79$  $plus.minus$ $0.24$], text(fill: rgb(128, 128, 128))[$15$  $plus.minus$ $0.00$], text(fill: rgb(128, 128, 128))[$40.93$  $plus.minus$ $20.14$],
+      [*CKL*], text(fill: rgb(128, 128, 128))[$82.75$  $plus.minus$ $0.20$], text(fill: rgb(128, 128, 128))[$15$  $plus.minus$ $0.00$], text(fill: rgb(128, 128, 128))[$18.41$  $plus.minus$ $7.89$],
+      [*Dim-CV*], text(fill: rgb(128, 128, 128))[$77.67$  $plus.minus$ $0.02$], text(fill: rgb(128, 128, 128))[$1.47$  $plus.minus$ $0.51$], text(fill: rgb(128, 128, 128))[$1721.9$  $plus.minus$ $26.71$],
     )
   ),
   caption: [*Only LORE is able to recover the low dimensional structure of the data* while maintaining near-optimal test triplet accuracy on the Food-100 dataset @wilber2014cost.]
