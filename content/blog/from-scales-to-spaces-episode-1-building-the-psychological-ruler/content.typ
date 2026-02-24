@@ -14,7 +14,7 @@ In the midst of this crisis, L.L. Thurstone proposed a breakthrough in his 1927 
 
 #figure(
   image("figures/absolute_vs_relative_scales.svg", width: 100%),
-  caption: [Absolute vs Relative Scales. Human perception does not have an absolute scale to measure against like physical concepts like length or weight. However, humans possess a high sensitive comparison mechanism to compare any two stimuli via a relative scale.],
+  caption: [Absolute vs Relative Scales. Human perception does not have an absolute scale to measure against like physical concepts like length or weight. However, humans possess a high sensitive comparison mechanism to compare any two stimuli via a relative scale. In this example, it is much easier to say which sound is louder rather than saying how loud each sound is.],
 ) <fig:absolute_vs_relative_scales>
 
 == Scales: The 1D Era

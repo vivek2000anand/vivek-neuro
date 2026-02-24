@@ -1,5 +1,5 @@
 #import "@preview/ouset:0.2.0": underset
-#import "@preview/equate:0.1.0": *
+
 #import "@preview/subpar:0.2.2"
 Based on our ICLR 2026 paper: #link("https://arxiv.org/abs/2602.04192")["LORE: Jointly Learning The Intrinsic Dimensionality and Relative Similarity Structure from Ordinal Data"]
 
@@ -10,7 +10,10 @@ Historically, researchers relied on absolute queries, like asking subjects to ra
 
 The field developed Multidimensional Scaling (MDS) algorithms @kruskal1964multidimensional (which give you exact solutions but require the entire pairwise distance matrix) and Ordinal Embedding algorithms (OEs) @agarwal2007generalized @tamuzAdaptivelyLearningCrowd2011 @terada2014local (which are much more data efficient but are nonconvex with little guarantees). These methods allowed researchers to build multidimensional perceptual _maps_ instead of just rulers. from relative queries of the form "Is stimulus A more similar to B than to C?".
 
-[PUT FIGURE HERE: similar to blog post]
+#figure(
+  image("figures/absolute_vs_relative_scales.svg", width: 100%),
+  caption: [Absolute vs Relative Scales. Human perception does not have an absolute scale to measure against like physical concepts like length or weight. However, humans possess a high sensitive comparison mechanism to compare any two stimuli via a relative scale. In this example, it is much easier to say which sound is louder rather than saying how loud each sound is.],
+) <fig:absolute_vs_relative_scales>
 
 But there's a massive catch. Both MDS and OEs require you specify the dimensionality of the space you want to embed your perceptual space onto.
 
@@ -61,7 +64,7 @@ We benchmarked LORE against the state-of-the-art OEs on a range of synthetic dat
 But the most exciting results came from real, noisy human data, including the Food-100 dataset @wilber2014cost which collected crowdsourced ratings of 100 different food items in terms of perceived similarity of taste. Given a maximum dimension of 15 for Food-100, standard OEs used all 15 dimensions, creating a completely tangled perceptual space. LORE automatically compressed the embedding down to roughly 3.3 dimensions. While we do not know the true intrinsic rank of Food-100, LORE's embedding is semantically meaningful suggesting that Food-100's intrinsic rank might be around 3-4 dimensions. Similar results for other datasets can be seen in the paper.
 
 #figure(
-  caption: [Only LORE can capture the true intrinsic rank of the data while maintaining near-optimal test triplet accuracy on the Food-100 dataset. ]
+  caption: [Only LORE can capture the true intrinsic rank of the data while maintaining near-optimal test triplet accuracy on the Food-100 dataset. ],
 table(
   columns: 4,
   stroke: none,
