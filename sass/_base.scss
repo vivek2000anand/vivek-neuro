@@ -121,10 +121,16 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin: $spacing-xl 0;
-  background-color: var(--color-bg-primary);
+  background-color: #ffffff;
+  color: #000000;
   
   th, td {
     padding: $spacing-sm $spacing-md;
+    border: 1px solid #000000;
+  }
+
+  th {
+    border-bottom: 2px solid #000000;
   }
 }
 
