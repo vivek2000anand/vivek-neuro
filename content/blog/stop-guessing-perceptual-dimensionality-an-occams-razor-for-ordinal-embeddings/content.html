@@ -25,58 +25,54 @@ data-cites="shepard1962analysis1 tamuzAdaptivelyLearningCrowd2011 terada2014loca
 href="#ref-shepard1962analysis1" role="doc-biblioref">[4]</a>, <a
 href="#ref-tamuzAdaptivelyLearningCrowd2011"
 role="doc-biblioref">[5]</a>, <a href="#ref-terada2014local"
-role="doc-biblioref">[6]</a></span>, leveraged relative queries that ask
-subjects to compare stimuli with each other instead of rating them on an
-absolute scale. (Check out <a
-href="https://vivek-anand.xyz/blog/from-scales-to-spaces-episode-1-building-the-psychological-ruler/">this</a>
-blog post for more details on how relative queries allowed psychophysics
-to escape the absolute ruler.) However, converting these relative
-judgements into a latent geometry is non-trivial.</p>
-<p>The field developed Multidimensional Scaling (MDS) algorithms <span
-class="citation" data-cites="kruskal1964multidimensional"><a
+role="doc-biblioref">[6]</a></span> leveraged relative queries. These
+ask subjects to compare stimuli against each other (e.g., “Is stimulus A
+more similar to B than to C?”) instead of rating them in a vacuum.
+(Check out Episode 1 of my blog series for more details on how relative
+queries allowed psychophysics to escape the absolute ruler.)</p>
+<p>However, converting these relative judgements into a latent geometry
+is non-trivial. The field developed Multidimensional Scaling (MDS)
+algorithms <span class="citation"
+data-cites="kruskal1964multidimensional"><a
 href="#ref-kruskal1964multidimensional"
-role="doc-biblioref">[7]</a></span> (which give you exact solutions but
-require the entire pairwise distance matrix) and Ordinal Embedding
-algorithms (OEs) <span class="citation"
+role="doc-biblioref">[7]</a></span>, which yield exact solutions but
+require an exhaustive pairwise distance matrix, and Ordinal Embedding
+(OE) algorithms <span class="citation"
 data-cites="agarwal2007generalized tamuzAdaptivelyLearningCrowd2011 terada2014local"><a
 href="#ref-tamuzAdaptivelyLearningCrowd2011"
 role="doc-biblioref">[5]</a>, <a href="#ref-terada2014local"
 role="doc-biblioref">[6]</a>, <a href="#ref-agarwal2007generalized"
-role="doc-biblioref">[8]</a></span> (which are much more data efficient
-but are nonconvex with little guarantees). These methods allowed
-researchers to build multidimensional perceptual <em>maps</em> instead
-of just rulers. from relative queries of the form “Is stimulus A more
-similar to B than to C?”.</p>
+role="doc-biblioref">[8]</a></span>, which are highly data-efficient but
+non-convex. Despite their challenges, these methods allowed researchers
+to finally build multidimensional perceptual <em>maps</em> instead of
+flat rulers.</p>
 <figure>
 <p><img src="figures/absolute_vs_relative_scales.svg"
 style="width:100.0%" /></p>
 <figcaption><p><strong>Relative Scales are more reliable than absolute
-scales.</strong> Human perception does not have an absolute scale to
-measure against like physical concepts like length or weight. However,
-humans possess a high sensitive comparison mechanism to compare any two
-stimuli via a relative scale. In this example, it is much easier to say
-which sound is louder rather than saying how loud each sound
+scales.</strong> Human perception lacks an absolute baseline for
+abstract concepts like loudness or taste. However, we possess a highly
+sensitive comparison mechanism. In this example, it is much easier to
+say which sound is louder than to quantify exactly how loud each sound
 is.</p></figcaption>
 </figure>
 <p><span id="fig:absolute_vs_relative_scales"></span></p>
-<p>But there’s a massive catch. Both MDS and OEs require you specify the
-dimensionality of the space you want to embed your perceptual space
-onto.</p>
+<p>But there’s a massive catch. Both MDS and OEs require you to specify
+the dimensionality of the map <strong>before</strong> you even start
+building it.</p>
 <h2>The Problem of Dimensionality</h2>
-<p>Consider the following thought experiment. Imagine that you are
-trying to learn the perceptual geometry of taste of various foods. How
-many dimensions do you thinkg you need to capture the geometry of taste?
-Sweetness, sourness give us two. Texture adds a third. Maybe temperature
-adds a fourth? Regardless of your intuition in choosing the
-dimensionality, you are making an arbitrary choice and you are
-essentially guessing what the geometry of the space looks like. This can
-be untenable in situtations where you aim to discover the dimensionality
-of the space from data for percepts that you do not know anything about,
-which is a lot of psychology!</p>
-<p>MDS and OEs require you to specify the dimensionality of the space
-you want to embed your perceptual space, the <em>intrinsic rank</em>
-before you even start learning the geometry of the space. This forces
-you to a blind guessing game leading to two major problems:</p>
+<p>Consider a thought experiment. Imagine trying to map the perceptual
+geometry of food. How many dimensions do you think you need? Sweetness
+and sourness give us two. Texture adds a third. Maybe temperature adds a
+fourth?</p>
+<p>Regardless of your intuition, manually choosing the dimensionality
+means you are making an arbitrary guess about the shape of the space.
+This is a major roadblock when the entire goal of your research is to
+<em>discover</em> the underlying structure of an unknown percept, which
+is the case for much of psychology!</p>
+<p>Because existing OEs require you to specify this intrinsic rank
+upfront, you are forced into a blind guessing game that leads to two
+major problems:</p>
 <ul>
 <li><p><strong>Underfitting</strong>: If you guess too few dimensions,
 you crush complex relationships. The model might combine “spicy” and
@@ -87,59 +83,63 @@ all of them. A 15D model might satisfy all your triplet comparisons
 perfectly, but it fractures simple concepts across multiple axes, making
 the resulting map totally uninterpretable to scientists.</p></li>
 </ul>
-<p>Scientific discovery demands Occam’s Razor: we want the simplest
-model that explains the data. A 2D taste map is infinitely more useful
-than a 10D one if the underlying percept only varies in two ways. Yet,
-historically, we had no scalable way to let the data tell us its own
-complexity.</p>
+<p>Scientific discovery demands <strong>Occam’s Razor</strong>: we want
+the simplest model that explains the data. A 2D taste map is infinitely
+more useful than a 10D one if the underlying percept only varies in two
+ways. Yet, historically, we had no scalable way to let the data tell us
+its own complexity.</p>
 <figure>
 <p><img src="figures/crown_jewel_version_3.3.svg"
 style="width:100.0%" /></p>
 <figcaption><p><strong>LORE jointly learns both the intrinsic
-dimensionality and relative similarities by balancing dimensionality
-with similarity constraints.</strong>: Other methods require the
-embedding dimension to be chosen apriori, making them susceptible to
-underfitting and overparameterizing</p></figcaption>
+dimensionality and relative similarities.</strong>: Other methods
+require the embedding dimension to be chosen apriori, making them highly
+susceptible to underfitting or overparameterizing the latent
+space.</p></figcaption>
 </figure>
 <p><span id="fig:crown_jewel"></span></p>
 <h2>LORE: Letting the Data Tell You the Intrinsic Rank</h2>
-<p>To solve this problem, we introduce LORE (Low Rank Ordinal
-Embedding), a new OE algorithm that jointly learns the intrinsic rank
-and relative similarities directly from the data.</p>
-<p>The main intuition behind LORE is to balance learning the relative
-similarity structure (that most OEs do quite well) with learning the
-dimensionality/intrinsic rank of the learned embedding matrix. Since
-strict rank minimization is NP-Hard <span class="citation"
+<p>To solve this, we introduce LORE (Low Rank Ordinal Embedding), a new
+algorithm that jointly learns the intrinsic rank and the relative
+similarities directly from the data.</p>
+<p>The core intuition behind LORE is to apply Occam’s Razor
+mathematically. We want to balance fitting the similarity structure
+(which existing OEs do quite well) with penalizing unnecessary
+dimensions. Strictly minimizing the number of dimensions (the matrix
+rank) is computationally NP-Hard <span class="citation"
 data-cites="fazel2001rank"><a href="#ref-fazel2001rank"
-role="doc-biblioref">[9]</a></span>, most normally use the convex
-relaxation, the nuclear norm <span class="citation"
+role="doc-biblioref">[9]</a></span>. The standard workaround is to use a
+convex relaxation called the nuclear norm <span class="citation"
 data-cites="candesExactMatrixCompletion2008a"><a
 href="#ref-candesExactMatrixCompletion2008a"
 role="doc-biblioref">[10]</a></span>.</p>
-<p>However, there is a problem: the nuclear norm uniformly shrinks all
-singular values <span class="citation"
+<p>However, there is a problem: the nuclear norm uniformly shrinks
+<em>all</em> singular values <span class="citation"
 data-cites="negahban2011estimation zhang2010nearly"><a
 href="#ref-negahban2011estimation" role="doc-biblioref">[11]</a>, <a
-href="#ref-zhang2010nearly" role="doc-biblioref">[12]</a></span>. While
-this works for standard matrix completion, it often fails to recover the
-true intrinsic rank of perceptual spaces because it over-penalizes the
-largest, most important singular values that actually define the space
-leading to solutions with low magnitude of singular values but not
-necessarily lower rank solutions <span class="citation"
-data-cites="luGeneralizedNonconvexNonsmooth2014"><a
+href="#ref-zhang2010nearly" role="doc-biblioref">[12]</a></span> not
+just the lower order ones. While this works well empirically for
+standard matrix completion <span class="citation"
+data-cites="candesExactMatrixCompletion2008a"><a
+href="#ref-candesExactMatrixCompletion2008a"
+role="doc-biblioref">[10]</a></span>, it often fails to recover the true
+intrinsic rank of perceptual spaces because it over-penalizes the
+largest, most important dimensions that actually define the space <span
+class="citation" data-cites="luGeneralizedNonconvexNonsmooth2014"><a
 href="#ref-luGeneralizedNonconvexNonsmooth2014"
 role="doc-biblioref">[13]</a></span>.</p>
 <p>Instead LORE regularizes using the nonconvex Schatten <span
 class="math inline">\(p\)</span> Quasi-norm (<span
-class="math inline">\(0 &lt; p &lt; 1\)</span>) which penalizes the
-larger singular values less severely <span class="citation"
+class="math inline">\(0 &lt; p &lt; 1\)</span>) <span class="citation"
 data-cites="luGeneralizedNonconvexNonsmooth2014 marjanovic2012l_q"><a
 href="#ref-luGeneralizedNonconvexNonsmooth2014"
 role="doc-biblioref">[13]</a>, <a href="#ref-marjanovic2012l_q"
-role="doc-biblioref">[14]</a></span>. This allows LORE to recover the
-dominant perceptual dimensions while aggressively crushing the
-noise.</p>
-<p>Specifically, the objective is <span
+role="doc-biblioref">[14]</a></span>. This specific penalty is much more
+forgiving to the large, dominant singular values but aggressively
+crushes the smaller, noisy ones to zero.</p>
+<p>By balancing a smoothed ordinal embedding loss with this Schatten
+<span class="math inline">\(p\)</span>-quasi-norm penalty, LORE
+automatically prunes away unnecessary dimensions during training. <span
 class="math display">\[\begin{array}{rlr}
 \underset{\mathbf{Z}}{\text{min}}\text{   }\Psi(\mathbf{Z}) &amp; =
 \sum\limits_{(a,i,j) \in T}\log(1 + \exp(1 + d\left(
@@ -148,60 +148,54 @@ class="math display">\[\begin{array}{rlr}
 1}^{\min\left\{ N,d&#39; \right\}}\sigma_{i}\left( \mathbf{Z}
 \right)^{p}.
 \end{array}\]</span></p>
-<p>The first term is an ordinal embedding objective (smoothed to allow
-for easier optimization) and the second term is the nonconvex Schatten
-<span class="math inline">\(p\)</span> Quasi-norm (<span
-class="math inline">\(0 &lt; p &lt; 1\)</span>) regularization term.
-Though the objective is easily defined, optimization is tricky. Both
-terms here are non-convex and there exists no closed form solution. To
-overcome the difficulty of optimization, we leverage iteratively
-reweighted methods <span class="citation"
-data-cites="sun2017convergence"><a href="#ref-sun2017convergence"
-role="doc-biblioref">[15]</a></span> which are more robust compared to
-direct stochastic gradient descent. Even with the inherent
-non-convexity, this guarantees convergence to a stationary point. And
-because stationary points in OE landscapes are often nearly as good as
-global optima <span class="citation"
+<p>Because this objective is highly non-convex, standard optimization
+methods often fail. To solve this, we use an efficiently scaled,
+iteratively reweighted Singular Value Decomposition (SVD) algorithm
+<span class="citation" data-cites="sun2017convergence"><a
+href="#ref-sun2017convergence" role="doc-biblioref">[15]</a></span>.
+Even with the inherent non-convexity, this guarantees convergence to a
+stationary point. And because stationary points in OE landscapes are
+generally known to be nearly as good as global optima <span
+class="citation"
 data-cites="bower2018landscape vankadara2023insights"><a
 href="#ref-bower2018landscape" role="doc-biblioref">[16]</a>, <a
 href="#ref-vankadara2023insights" role="doc-biblioref">[17]</a></span>,
-LORE reliably yields robust embeddings.</p>
+LORE reliably yields robust, high quality embeddings.</p>
 <h2>Does it work? Yes!</h2>
-<p>The real challenge in evaluating LORE to existing OEs is that for
-most human perceptual datasets, a true intrinsic rank is unknown.
-Therefore we need to leverage synthetic data where we do implicitly know
-the intrinsic rank. We benchmarked LORE against the state-of-the-art OEs
-on a range of synthetic data using across synthetic data, LLM-generated
-proxy perceptual spaces (using SBERT <span class="citation"
-data-cites="reimers-2019-sentence-bert"><a
+<p>Evaluating LORE against existing methods is tricky because, for real
+human data, we don’t actually know the “true” intrinsic rank. Therefore,
+we first had to leverage synthetic data where the ground-truth rank is
+known.</p>
+<p>We benchmarked LORE against state-of-the-art OEs across synthetic
+environments, as well as LLM-generated proxy perceptual spaces (using
+SBERT <span class="citation" data-cites="reimers-2019-sentence-bert"><a
 href="#ref-reimers-2019-sentence-bert"
-role="doc-biblioref">[18]</a></span> to model human alignment <span
-class="citation" data-cites="marjieh2024large"><a
-href="#ref-marjieh2024large" role="doc-biblioref">[19]</a></span>), and
-real human crowdsourced datasets. In the following plot, comparing LORE
-to SOTA OEs on perceptual similarity of a large language model its very
-impressive to see that <strong>LORE was the only method that accurately
-tracked and recovered the true intrinsic rank while maintaining
-near-optimal test triplet accuracy.</strong></p>
+role="doc-biblioref">[18]</a></span> to model human alignment. It has
+been found that LLMs are able to capture human perceptual similarity
+<span class="citation" data-cites="marjieh2024large"><a
+href="#ref-marjieh2024large" role="doc-biblioref">[19]</a></span>). As
+seen in the plot below, the results were stark: <strong>LORE was the
+only method that accurately tracked and recovered the true intrinsic
+rank while maintaining near-optimal test triplet accuracy.</strong></p>
 <figure>
 <p><img src="figures/artificial_perceptual_full.svg"
 style="width:100.0%" /></p>
-<figcaption><p>Only LORE can learn the true intrinsic rank while
-maintaining high accuracy on synthetic data.</p></figcaption>
+<figcaption><p>Only LORE successfully learns the true intrinsic rank
+while maintaining high accuracy on LLM-simulated perceptual
+data.</p></figcaption>
 </figure>
 <p><span id="fig:artificial_perceptual"></span></p>
 <p>But the most exciting results came from real, noisy human data,
 including the Food-100 dataset <span class="citation"
 data-cites="wilber2014cost"><a href="#ref-wilber2014cost"
-role="doc-biblioref">[20]</a></span> which collected crowdsourced
-ratings of 100 different food items in terms of perceived similarity of
-taste. Given a maximum dimension of 15 for Food-100, standard OEs used
-all 15 dimensions, creating a completely tangled perceptual space. LORE
-automatically compressed the embedding down to roughly 3.3 dimensions.
-While we do not know the true intrinsic rank of Food-100, LORE’s
-embedding is semantically meaningful suggesting that Food-100’s
-intrinsic rank might be around 3-4 dimensions. Similar results for other
-datasets can be seen in the paper.</p>
+role="doc-biblioref">[20]</a></span>, which contains crowdsourced
+triplet ratings of 100 different food items based on perceived
+similarity of taste.</p>
+<p>Given a maximum allowable dimension of 15, standard OEs blindly used
+all 15 dimensions, creating a completely tangled perceptual space. LORE,
+acting as an automated Occam’s Razor, seamlessly compressed the
+embedding down to roughly 3.3 dimensions without sacrificing
+accuracy.</p>
 <table>
 <caption><p><strong>Only LORE is able to recover the low dimensional
 structure of the data</strong> while maintaining near-optimal test
@@ -311,8 +305,12 @@ class="math inline">\(26.71\)</span></p></td>
 </tbody>
 </table>
 <p><span id="table:food100_dataset"></span></p>
-<p>Even better, without any semantic supervision, LORE’s learned axes
-were highly interpretable:</p>
+<p>The ultimate test of any perceptual map is whether its dimensions
+actually mean something. Remarkably, even though LORE was trained purely
+on relative similarities, the resulting axes organically aligned with
+human interpretable features. The first axis naturally separates sweet
+from savory; the second contrasts dense foods with light ones; and the
+third distinguishes carb-heavy items from proteins and vegetables.</p>
 <figure>
 <p><img src="figures/interpretability.svg" style="width:100.0%" /></p>
 <figcaption><p>LORE’s learned axes are semantically interpretable on the
@@ -321,18 +319,14 @@ href="#ref-wilber2014cost"
 role="doc-biblioref">[20]</a></span></p></figcaption>
 </figure>
 <p><span id="fig:interpretability"></span></p>
-<ol>
-<li><p>Axis 1: Sweet to Savory</p></li>
-<li><p>Axis 2: Dense to Light</p></li>
-<li><p>Axis 3: Carb-heavy to Protein/Vegetable</p></li>
-</ol>
 <h2>The Takeaway</h2>
 <p>When we model human perception, we aren’t just trying to maximize
-predictive accuracy on a holdout set; we are trying to uncover the
-latent geometry of the mind. By jointly inferring relative similarities
-and intrinsic dimensionality, LORE removes the need for arbitrary
-guessing of the true intrinsic geometry, ensuring we neither underfit
-nor overparameterize the underlying perceptual space.</p>
+predictive accuracy on a holdout set. Instead, we are trying to uncover
+the latent geometry of the mind. By jointly inferring relative
+similarities and intrinsic dimensionality, LORE bakes Occam’s Razor
+directly into the learning process. It removes the need to blindly guess
+the dimensionality, ensuring we neither underfit nor overparameterize
+the underlying perceptual space.</p>
 <h2>Code</h2>
 <p>Code to reproduce our results and for your own ordinal datasets is
 available at <a
