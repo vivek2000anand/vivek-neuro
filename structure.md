@@ -3,6 +3,7 @@
 - `vivek_neuro/`: Root directory of the Zola site
     - `content/`: Markdown and Typst content
         - `blog/`: Blog posts
+            - `stop-guessing-perceptual-dimensionality-an-occams-razor-for-ordinal-embeddings/`: LORE blog post
     - `build.ps1`: Build script to convert Typst to HTML via Pandoc
     - `templates/`: Zola HTML templates
     - `static/`: Static assets

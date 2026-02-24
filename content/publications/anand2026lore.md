@@ -9,6 +9,7 @@ venue = "International Conference on Learning Representations (ICLR)"
 entry_type = "inproceedings"
 cite_key = "anand2026lore"
 paper_url = "https://openreview.net/forum?id=QmgEUx2Cd7"
+blog_url = "/blog/stop-guessing-perceptual-dimensionality-an-occams-razor-for-ordinal-embeddings"
 
 [taxonomies]
 tags = ["ordinal-embedding", "intrinsic-dimensionality", "psychology", "representations", "machine-learning", "subjective-perceptual-learning", "relative-similarity-embedding"]

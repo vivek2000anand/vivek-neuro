@@ -7,7 +7,6 @@
         <header class="blog-post__header">
             <h1 class="blog-post__title">{{ page.title }}</h1>
             <div class="blog-post__meta">
-                <time>{{ page.date | date(format="%B %d, %Y") }}</time>
                 {% if page.taxonomies.tags %}
                 <div class="blog-post__tags">
                     {% for tag in page.taxonomies.tags %}
@@ -15,6 +14,7 @@
                     {% endfor %}
                 </div>
                 {% endif %}
+                <time class="blog-post__date">{{ page.date | date(format="%B %d, %Y") }}</time>
             </div>
         </header>
 
