@@ -47,7 +47,7 @@ Instead LORE regularizes using the nonconvex Schatten $p$ Quasi-norm ($0<p<1$) @
 By balancing a smoothed ordinal embedding loss with this Schatten $p$-quasi-norm penalty, LORE automatically prunes away unnecessary dimensions during training.
 $
 
-  underset("min", bold(Z)) " " Psi(bold(Z))  &= underset(sum, (a,i,j) in T)  log(1 + exp(1 + d(bold(Z)_(a,:), bold(Z)_(i,:)) - d(bold(Z)_(a,:), bold(Z)_(j,:))))) &+ sum_(i=1)^(min{N, d^'}) sigma_(i) (bold(Z))^p .
+  underset("min", bold(Z)) " " Psi(bold(Z))  &= underset(sum, (a,i,j) in T)  log(1 + exp(1 + d(bold(Z)_(a,:), bold(Z)_(i,:)) - d(bold(Z)_(a,:), bold(Z)_(j,:))))) & + lambda sum_(i=1)^(min{N, d^'}) sigma_(i) (bold(Z))^p .
 
 $
 
