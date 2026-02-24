@@ -115,3 +115,22 @@ img {
   height: auto;
   border-radius: $radius-md;
 }
+
+// Tables
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: $spacing-xl 0;
+  background-color: var(--color-bg-primary);
+  
+  th, td {
+    padding: $spacing-sm $spacing-md;
+  }
+}
+
+caption {
+  caption-side: bottom;
+  margin-top: $spacing-md;
+  text-align: center;
+  color: var(--color-text-secondary);
+}

@@ -63,27 +63,31 @@ We benchmarked LORE against the state-of-the-art OEs on a range of synthetic dat
 
 But the most exciting results came from real, noisy human data, including the Food-100 dataset @wilber2014cost which collected crowdsourced ratings of 100 different food items in terms of perceived similarity of taste. Given a maximum dimension of 15 for Food-100, standard OEs used all 15 dimensions, creating a completely tangled perceptual space. LORE automatically compressed the embedding down to roughly 3.3 dimensions. While we do not know the true intrinsic rank of Food-100, LORE's embedding is semantically meaningful suggesting that Food-100's intrinsic rank might be around 3-4 dimensions. Similar results for other datasets can be seen in the paper.
 
+
 #figure(
-  table(
-    columns: 4,
-    stroke: none,
-    fill: white,
-    align: (left, center, center, center),
-    table.hline(),
-    table.header(
-      [*Method*], [*Test Acc.*], [*Rank*], [*Time (s)*],
-      table.hline()
-    ),
-    [*LORE* \ (Ours)], [$82.45$ \ $plus.minus 0.27$], [*$3.3$* \ *$plus.minus 0.47$*], [$6.64$ \ $plus.minus 3.90$],
-    [*SOE*], [$82.34$ \ $plus.minus 0.32$], [$15$ \ $plus.minus 0.00$], [$27.09$ \ $plus.minus 1.38$],
-    [*FORTE*], [$81.73$ \ $plus.minus 0.46$], [$15$ \ $plus.minus 0.00$], [$6.34$ \ $plus.minus 0.52$],
-    [*t-STE*], [$82.79$ \ $plus.minus 0.24$], [$15$ \ $plus.minus 0.00$], [$40.93$ \ $plus.minus 20.14$],
-    [*CKL*], [$82.75$ \ $plus.minus 0.20$], [$15$ \ $plus.minus 0.00$], [$18.41$ \ $plus.minus 7.89$],
-    [*Dim-CV*], [$77.67$ \ $plus.minus 0.02$], [$1.47$ \ $plus.minus 0.51$], [$1721.9$ \ $plus.minus 26.71$],
-    table.hline(),
+  block(
+    fill: white,       // Forces a solid white background behind the entire table
+    inset: 8pt,        // Adds a little breathing room around the edges
+    width: 100%,
+    table(
+      columns: 4, // Allow columns to expand evenly instead of forcing fractional sizing
+      stroke: 0.5pt + black,
+      align: (left, center, center, center),
+      table.header(
+        [*Method*], [*Test Acc.*], [*Rank*], [*Time (s)*],
+      ),
+      table.hline(stroke: 2pt + black),
+      [*LORE* \ (Ours)], [$82.45$ \ $plus.minus 0.27$], [*$3.3$* \ *$plus.minus 0.47$*], [$6.64$ \ $plus.minus 3.90$],
+      [*SOE*], [$82.34$ \ $plus.minus 0.32$], [$15$ \ $plus.minus 0.00$], [$27.09$ \ $plus.minus 1.38$],
+      [*FORTE*], [$81.73$ \ $plus.minus 0.46$], [$15$ \ $plus.minus 0.00$], [$6.34$ \ $plus.minus 0.52$],
+      [*t-STE*], [$82.79$ \ $plus.minus 0.24$], [$15$ \ $plus.minus 0.00$], [$40.93$ \ $plus.minus 20.14$],
+      [*CKL*], [$82.75$ \ $plus.minus 0.20$], [$15$ \ $plus.minus 0.00$], [$18.41$ \ $plus.minus 7.89$],
+      [*Dim-CV*], [$77.67$ \ $plus.minus 0.02$], [$1.47$ \ $plus.minus 0.51$], [$1721.9$ \ $plus.minus 26.71$],
+    )
   ),
   caption: [*Only LORE is able to recover the low dimensional structure of the data* while maintaining near-optimal test triplet accuracy on the Food-100 dataset @wilber2014cost.]
 ) <table:food100_dataset>
+
 
 Even better, without any semantic supervision, LORE's learned axes were highly interpretable:
 
