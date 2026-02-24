@@ -47,7 +47,18 @@ but are nonconvex with little guarantees). These methods allowed
 researchers to build multidimensional perceptual <em>maps</em> instead
 of just rulers. from relative queries of the form “Is stimulus A more
 similar to B than to C?”.</p>
-<p>[PUT FIGURE HERE: similar to blog post]</p>
+<figure>
+<p><img src="figures/absolute_vs_relative_scales.svg"
+style="width:100.0%" /></p>
+<figcaption><p><strong>Relative Scales are more reliable than absolute
+scales.</strong> Human perception does not have an absolute scale to
+measure against like physical concepts like length or weight. However,
+humans possess a high sensitive comparison mechanism to compare any two
+stimuli via a relative scale. In this example, it is much easier to say
+which sound is louder rather than saying how loud each sound
+is.</p></figcaption>
+</figure>
+<p><span id="fig:absolute_vs_relative_scales"></span></p>
 <p>But there’s a massive catch. Both MDS and OEs require you specify the
 dimensionality of the space you want to embed your perceptual space
 onto.</p>
@@ -192,54 +203,92 @@ embedding is semantically meaningful suggesting that Food-100’s
 intrinsic rank might be around 3-4 dimensions. Similar results for other
 datasets can be seen in the paper.</p>
 <table>
-<caption><p>Only LORE can capture the true intrinsic rank of the data
-while maintaining near-optimal test triplet accuracy on the Food-100
-dataset.</p></caption>
+<caption><p><strong>Only LORE is able to recover the low dimensional
+structure of the data</strong> while maintaining near-optimal test
+triplet accuracy on the Food-100 dataset <span class="citation"
+data-cites="wilber2014cost"><a href="#ref-wilber2014cost"
+role="doc-biblioref">[20]</a></span>.</p></caption>
 <thead>
 <tr>
-<th><p><strong>Method</strong></p></th>
-<th><p><strong>Test Acc.</strong></p></th>
-<th><p><strong>Rank</strong></p></th>
-<th><p><strong>Time (s)</strong></p></th>
+<th style="text-align: left;"><p><strong>Method</strong></p></th>
+<th style="text-align: center;"><p><strong>Test Acc.</strong></p></th>
+<th style="text-align: center;"><p><strong>Rank</strong></p></th>
+<th style="text-align: center;"><p><strong>Time (s)</strong></p></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><p><strong>LORE</strong> (Ours)</p></td>
-<td><p><span class="math inline">\(82.45 \pm 0.27\)</span></p></td>
-<td><p><strong><span class="math inline">\(3.3 \pm
-0.47\)</span></strong></p></td>
-<td><p><span class="math inline">\(6.64 \pm 3.90\)</span></p></td>
+<td style="text-align: left;"><p><strong>LORE</strong><br />
+(Ours)</p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(82.45\)</span><br />
+<span class="math inline">\(\pm 0.27\)</span></p></td>
+<td style="text-align: center;"><p><strong><span
+class="math inline">\(3.3\)</span></strong><br />
+<strong><span class="math inline">\(\pm 0.47\)</span></strong></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(6.64\)</span><br />
+<span class="math inline">\(\pm 3.90\)</span></p></td>
 </tr>
 <tr>
-<td><p><strong>SOE</strong></p></td>
-<td><p><span class="math inline">\(82.34 \pm 0.32\)</span></p></td>
-<td><p><span class="math inline">\(15 \pm 0.00\)</span></p></td>
-<td><p><span class="math inline">\(27.09 \pm 1.38\)</span></p></td>
+<td style="text-align: left;"><p><strong>SOE</strong></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(82.34\)</span><br />
+<span class="math inline">\(\pm 0.32\)</span></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(15\)</span><br />
+<span class="math inline">\(\pm 0.00\)</span></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(27.09\)</span><br />
+<span class="math inline">\(\pm 1.38\)</span></p></td>
 </tr>
 <tr>
-<td><p><strong>FORTE</strong></p></td>
-<td><p><span class="math inline">\(81.73 \pm 0.46\)</span></p></td>
-<td><p><span class="math inline">\(15 \pm 0.00\)</span></p></td>
-<td><p><span class="math inline">\(6.34 \pm 0.52\)</span></p></td>
+<td style="text-align: left;"><p><strong>FORTE</strong></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(81.73\)</span><br />
+<span class="math inline">\(\pm 0.46\)</span></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(15\)</span><br />
+<span class="math inline">\(\pm 0.00\)</span></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(6.34\)</span><br />
+<span class="math inline">\(\pm 0.52\)</span></p></td>
 </tr>
 <tr>
-<td><p><strong>t-STE</strong></p></td>
-<td><p><span class="math inline">\(82.79 \pm 0.24\)</span></p></td>
-<td><p><span class="math inline">\(15 \pm 0.00\)</span></p></td>
-<td><p><span class="math inline">\(40.93 \pm 20.14\)</span></p></td>
+<td style="text-align: left;"><p><strong>t-STE</strong></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(82.79\)</span><br />
+<span class="math inline">\(\pm 0.24\)</span></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(15\)</span><br />
+<span class="math inline">\(\pm 0.00\)</span></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(40.93\)</span><br />
+<span class="math inline">\(\pm 20.14\)</span></p></td>
 </tr>
 <tr>
-<td><p><strong>CKL</strong></p></td>
-<td><p><span class="math inline">\(82.75 \pm 0.20\)</span></p></td>
-<td><p><span class="math inline">\(15 \pm 0.00\)</span></p></td>
-<td><p><span class="math inline">\(18.41 \pm 7.89\)</span></p></td>
+<td style="text-align: left;"><p><strong>CKL</strong></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(82.75\)</span><br />
+<span class="math inline">\(\pm 0.20\)</span></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(15\)</span><br />
+<span class="math inline">\(\pm 0.00\)</span></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(18.41\)</span><br />
+<span class="math inline">\(\pm 7.89\)</span></p></td>
 </tr>
 <tr>
-<td><p><strong>Dim-CV</strong></p></td>
-<td><p><span class="math inline">\(77.67 \pm 0.02\)</span></p></td>
-<td><p><span class="math inline">\(1.47 \pm 0.51\)</span></p></td>
-<td><p><span class="math inline">\(1721.9 \pm 26.71\)</span></p></td>
+<td style="text-align: left;"><p><strong>Dim-CV</strong></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(77.67\)</span><br />
+<span class="math inline">\(\pm 0.02\)</span></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(1.47\)</span><br />
+<span class="math inline">\(\pm 0.51\)</span></p></td>
+<td style="text-align: center;"><p><span
+class="math inline">\(1721.9\)</span><br />
+<span class="math inline">\(\pm 26.71\)</span></p></td>
 </tr>
 </tbody>
 </table>

@@ -1,6 +1,6 @@
 #import "@preview/ouset:0.2.0": underset
 
-#import "@preview/subpar:0.2.2"
+// #import "@preview/subpar:0.2.2"
 Based on our ICLR 2026 paper: #link("https://arxiv.org/abs/2602.04192")["LORE: Jointly Learning The Intrinsic Dimensionality and Relative Similarity Structure from Ordinal Data"]
 
 == Introduction
@@ -12,7 +12,7 @@ The field developed Multidimensional Scaling (MDS) algorithms @kruskal1964multid
 
 #figure(
   image("figures/absolute_vs_relative_scales.svg", width: 100%),
-  caption: [Absolute vs Relative Scales. Human perception does not have an absolute scale to measure against like physical concepts like length or weight. However, humans possess a high sensitive comparison mechanism to compare any two stimuli via a relative scale. In this example, it is much easier to say which sound is louder rather than saying how loud each sound is.],
+  caption: [*Relative Scales are more reliable than absolute scales.* Human perception does not have an absolute scale to measure against like physical concepts like length or weight. However, humans possess a high sensitive comparison mechanism to compare any two stimuli via a relative scale. In this example, it is much easier to say which sound is louder rather than saying how loud each sound is.],
 ) <fig:absolute_vs_relative_scales>
 
 But there's a massive catch. Both MDS and OEs require you specify the dimensionality of the space you want to embed your perceptual space onto.
@@ -64,23 +64,25 @@ We benchmarked LORE against the state-of-the-art OEs on a range of synthetic dat
 But the most exciting results came from real, noisy human data, including the Food-100 dataset @wilber2014cost which collected crowdsourced ratings of 100 different food items in terms of perceived similarity of taste. Given a maximum dimension of 15 for Food-100, standard OEs used all 15 dimensions, creating a completely tangled perceptual space. LORE automatically compressed the embedding down to roughly 3.3 dimensions. While we do not know the true intrinsic rank of Food-100, LORE's embedding is semantically meaningful suggesting that Food-100's intrinsic rank might be around 3-4 dimensions. Similar results for other datasets can be seen in the paper.
 
 #figure(
-  caption: [Only LORE can capture the true intrinsic rank of the data while maintaining near-optimal test triplet accuracy on the Food-100 dataset. ],
-table(
-  columns: 4,
-  stroke: none,
-  table.hline(),
-  table.header(
-    [*Method*], [*Test Acc.*], [*Rank*], [*Time (s)*],
-    table.hline()
+  table(
+    columns: 4,
+    stroke: none,
+    fill: white,
+    align: (left, center, center, center),
+    table.hline(),
+    table.header(
+      [*Method*], [*Test Acc.*], [*Rank*], [*Time (s)*],
+      table.hline()
+    ),
+    [*LORE* \ (Ours)], [$82.45$ \ $plus.minus 0.27$], [*$3.3$* \ *$plus.minus 0.47$*], [$6.64$ \ $plus.minus 3.90$],
+    [*SOE*], [$82.34$ \ $plus.minus 0.32$], [$15$ \ $plus.minus 0.00$], [$27.09$ \ $plus.minus 1.38$],
+    [*FORTE*], [$81.73$ \ $plus.minus 0.46$], [$15$ \ $plus.minus 0.00$], [$6.34$ \ $plus.minus 0.52$],
+    [*t-STE*], [$82.79$ \ $plus.minus 0.24$], [$15$ \ $plus.minus 0.00$], [$40.93$ \ $plus.minus 20.14$],
+    [*CKL*], [$82.75$ \ $plus.minus 0.20$], [$15$ \ $plus.minus 0.00$], [$18.41$ \ $plus.minus 7.89$],
+    [*Dim-CV*], [$77.67$ \ $plus.minus 0.02$], [$1.47$ \ $plus.minus 0.51$], [$1721.9$ \ $plus.minus 26.71$],
+    table.hline(),
   ),
-  [*LORE* (Ours)], [$82.45 plus.minus 0.27$], [*$3.3 plus.minus 0.47$*], [$6.64 plus.minus 3.90$],
-  [*SOE*], [$82.34 plus.minus 0.32$], [$15 plus.minus 0.00$], [$27.09 plus.minus 1.38$],
-  [*FORTE*], [$81.73 plus.minus 0.46$], [$15 plus.minus 0.00$], [$6.34 plus.minus 0.52$],
-  [*t-STE*], [$82.79 plus.minus 0.24$], [$15 plus.minus 0.00$], [$40.93 plus.minus 20.14$],
-  [*CKL*], [$82.75 plus.minus 0.20$], [$15 plus.minus 0.00$], [$18.41 plus.minus 7.89$],
-  [*Dim-CV*], [$77.67 plus.minus 0.02$], [$1.47 plus.minus 0.51$], [$1721.9 plus.minus 26.71$],
-  table.hline(),
-)
+  caption: [*Only LORE is able to recover the low dimensional structure of the data* while maintaining near-optimal test triplet accuracy on the Food-100 dataset @wilber2014cost.]
 ) <table:food100_dataset>
 
 Even better, without any semantic supervision, LORE's learned axes were highly interpretable:
