@@ -77,12 +77,12 @@ But the most exciting results came from real, noisy human data, including the Fo
         [*Method*], [*Test Acc.*], [*Rank*], [*Time (s)*],
       ),
       table.hline(stroke: 2pt + black),
-      [*LORE* \ (Ours)], [$82.45$ \ $plus.minus 0.27$], [*$3.3$* \ *$plus.minus 0.47$*], [$6.64$ \ $plus.minus 3.90$],
-      [*SOE*], [$82.34$ \ $plus.minus 0.32$], [$15$ \ $plus.minus 0.00$], [$27.09$ \ $plus.minus 1.38$],
-      [*FORTE*], [$81.73$ \ $plus.minus 0.46$], [$15$ \ $plus.minus 0.00$], [$6.34$ \ $plus.minus 0.52$],
-      [*t-STE*], [$82.79$ \ $plus.minus 0.24$], [$15$ \ $plus.minus 0.00$], [$40.93$ \ $plus.minus 20.14$],
-      [*CKL*], [$82.75$ \ $plus.minus 0.20$], [$15$ \ $plus.minus 0.00$], [$18.41$ \ $plus.minus 7.89$],
-      [*Dim-CV*], [$77.67$ \ $plus.minus 0.02$], [$1.47$ \ $plus.minus 0.51$], [$1721.9$ \ $plus.minus 26.71$],
+      [*LORE* \ (Ours)], [$82.45$  $plus.minus 0.27$], [*$3.3$*  *$plus.minus 0.47$*], [$6.64$  $plus.minus 3.90$],
+      [*SOE*], [$82.34$  $plus.minus 0.32$], [$15$  $plus.minus 0.00$], [$27.09$  $plus.minus 1.38$],
+      [*FORTE*], [$81.73$  $plus.minus 0.46$], [$15$  $plus.minus 0.00$], [$6.34$  $plus.minus 0.52$],
+      [*t-STE*], [$82.79$  $plus.minus 0.24$], [$15$  $plus.minus 0.00$], [$40.93$  $plus.minus 20.14$],
+      [*CKL*], [$82.75$  $plus.minus 0.20$], [$15$  $plus.minus 0.00$], [$18.41$  $plus.minus 7.89$],
+      [*Dim-CV*], [$77.67$  $plus.minus 0.02$], [$1.47$  $plus.minus 0.51$], [$1721.9$  $plus.minus 26.71$],
     )
   ),
   caption: [*Only LORE is able to recover the low dimensional structure of the data* while maintaining near-optimal test triplet accuracy on the Food-100 dataset @wilber2014cost.]
