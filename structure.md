@@ -7,6 +7,7 @@
             - `from-scales-to-spaces-episode-1-building-the-psychological-ruler/`: Blog post series episode 1
             - `from-scales-to-spaces-episode-2-from-ruler-to-map/`: Blog post series episode 2
             - `vibecoding-this-website-with-antigravity/`: Antigravity workflow post
+        - `publications/`: Publication entries
     - `build.ps1`: Build script to convert Typst to HTML via Pandoc
     - `templates/`: Zola HTML templates
     - `static/`: Static assets
