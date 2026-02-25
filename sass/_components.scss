@@ -495,9 +495,10 @@
   }
 
   &__buttons {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
     gap: $spacing-xs;
+    justify-content: start;
     flex-shrink: 0;
   }
   
@@ -671,9 +672,10 @@
   }
   
   &__buttons {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
     gap: $spacing-sm;
+    justify-content: start;
     margin-bottom: $spacing-md;
   }
   
