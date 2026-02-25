@@ -10,6 +10,7 @@ entry_type = "inproceedings"
 cite_key = "anand2026lore"
 paper_url = "https://arxiv.org/abs/2602.04192"
 video_url = "https://recorder-v3.slideslive.com/#/share?share=107881&s=dd530a22-2fa1-4283-8514-ccbe5ee083f4"
+slides_url = "files/lore_slides.pdf"
 blog_url = "/blog/stop-guessing-perceptual-dimensionality-an-occams-razor-for-ordinal-embeddings"
 
 [taxonomies]
