@@ -2,6 +2,16 @@
 href="https://arxiv.org/abs/2602.04192">LORE: Jointly Learning The
 Intrinsic Dimensionality and Relative Similarity Structure from Ordinal
 Data</a></p>
+<figure>
+<p><img src="figures/crown_jewel_version_3.3.svg"
+style="width:100.0%" /></p>
+<figcaption><p><strong>LORE jointly learns both the intrinsic
+dimensionality and relative similarities.</strong>: Other methods
+require the embedding dimension to be chosen apriori, making them highly
+susceptible to underfitting or overparameterizing the latent
+space.</p></figcaption>
+</figure>
+<p><span id="fig:crown_jewel_teaser"></span></p>
 <h2>Introduction</h2>
 <p>Measuring and mapping human perception quantitatively is hard. If you
 want to measure physical distance, you use a ruler. But if you want to
@@ -45,9 +55,12 @@ href="#ref-tamuzAdaptivelyLearningCrowd2011"
 role="doc-biblioref">[5]</a>, <a href="#ref-terada2014local"
 role="doc-biblioref">[6]</a>, <a href="#ref-agarwal2007generalized"
 role="doc-biblioref">[8]</a></span>, which are highly data-efficient but
-non-convex. Despite their challenges, these methods allowed researchers
-to finally build multidimensional perceptual <em>maps</em> instead of
-flat rulers.</p>
+non-convex. The non-convexity can be problematic if the algorithm
+settles in a particularly bad local minima leading to suboptimal
+embeddings that may be quite different from the true underlying percept.
+Despite their challenges, these methods allowed researchers to finally
+build multidimensional perceptual <em>maps</em> instead of flat
+rulers.</p>
 <figure>
 <p><img src="figures/absolute_vs_relative_scales.svg"
 style="width:100.0%" /></p>
@@ -100,7 +113,7 @@ susceptible to underfitting or overparameterizing the latent
 space.</p></figcaption>
 </figure>
 <p><span id="fig:crown_jewel"></span></p>
-<h2>LORE: Letting the Data Tell You the Intrinsic Rank</h2>
+<h2>LORE: Letting the Data Reveal the Intrinsic Rank</h2>
 <p>To solve this, we introduce LORE (Low Rank Ordinal Embedding), a new
 algorithm that jointly learns the intrinsic rank and the relative
 similarities directly from the data.</p>
@@ -120,8 +133,13 @@ role="doc-biblioref">[10]</a></span>.</p>
 data-cites="negahban2011estimation zhang2010nearly"><a
 href="#ref-negahban2011estimation" role="doc-biblioref">[11]</a>, <a
 href="#ref-zhang2010nearly" role="doc-biblioref">[12]</a></span> not
-just the lower order ones. While this works well empirically for
-standard matrix completion <span class="citation"
+just the lower order ones. The reason why this is an issue is because
+the a low rank solution has small or negligible lower singular values
+but usually would have large dominant singular values. A uniform
+shrinkage can lead to optimization results could lead to small errors in
+the magnitude of the singular values that could lead to very different
+ranks learned. While this works well empirically for standard matrix
+completion <span class="citation"
 data-cites="candesExactMatrixCompletion2008a"><a
 href="#ref-candesExactMatrixCompletion2008a"
 role="doc-biblioref">[10]</a></span>, it often fails to recover the true
@@ -138,7 +156,20 @@ href="#ref-luGeneralizedNonconvexNonsmooth2014"
 role="doc-biblioref">[13]</a>, <a href="#ref-marjanovic2012l_q"
 role="doc-biblioref">[14]</a></span>. This specific penalty is much more
 forgiving to the large, dominant singular values but aggressively
-crushes the smaller, noisy ones to zero.</p>
+crushes the smaller, noisy ones to zero. The following graph which
+compares the nuclear norm with the Schatten Quasi-norm visually
+illustrates the penalty each imposes (y axis) on the the particular
+singular value (x axis).</p>
+<figure>
+<p><img src="figures/why_schatten.svg" style="width:100.0%" /></p>
+<figcaption><p>The Schatten <span
+class="math inline">\(p\)</span>-quasi-norm is much more forgiving to
+large, dominant singular values than the nuclear norm but aggressively
+crushes smaller, noisy ones to zero. This allows is to empirically
+recover low rank solutions much more reliably than the nuclear
+norm.</p></figcaption>
+</figure>
+<p><span id="fig:why_schatten"></span></p>
 <p>By balancing a smoothed ordinal embedding loss with this Schatten
 <span class="math inline">\(p\)</span>-quasi-norm penalty, LORE
 automatically prunes away unnecessary dimensions during training. <span
@@ -151,14 +182,14 @@ class="math display">\[\begin{array}{rlr}
 \right)^{p}.
 \end{array}\]</span></p>
 <p>Because this objective is highly non-convex, standard optimization
-methods often fail. To solve this, we use an efficiently scaled,
-iteratively reweighted Singular Value Decomposition (SVD) algorithm
-<span class="citation" data-cites="sun2017convergence"><a
-href="#ref-sun2017convergence" role="doc-biblioref">[15]</a></span>.
-Even with the inherent non-convexity, this guarantees convergence to a
-stationary point. And because stationary points in OE landscapes are
-generally known to be nearly as good as global optima <span
-class="citation"
+methods often fail to learn a good enough solution. To solve this, we
+use an efficiently scaled, iteratively reweighted Singular Value
+Decomposition (SVD) algorithm <span class="citation"
+data-cites="sun2017convergence"><a href="#ref-sun2017convergence"
+role="doc-biblioref">[15]</a></span>. Even with the inherent
+non-convexity, this guarantees convergence to a stationary point. And
+because stationary points in OE landscapes are generally known to be
+nearly as good as global optima <span class="citation"
 data-cites="bower2018landscape vankadara2023insights"><a
 href="#ref-bower2018landscape" role="doc-biblioref">[16]</a>, <a
 href="#ref-vankadara2023insights" role="doc-biblioref">[17]</a></span>,
@@ -324,11 +355,13 @@ role="doc-biblioref">[20]</a></span></p></figcaption>
 <h2>The Takeaway</h2>
 <p>When we model human perception, we aren’t just trying to maximize
 predictive accuracy on a holdout set. Instead, we are trying to uncover
-the latent geometry of the mind. By jointly inferring relative
-similarities and intrinsic dimensionality, LORE bakes Occam’s Razor
-directly into the learning process. It removes the need to blindly guess
-the dimensionality, ensuring we neither underfit nor overparameterize
-the underlying perceptual space.</p>
+the latent perceptual maps which involve both learning the relative
+similarities and the intrinsic dimensionality. By jointly inferring both
+together, LORE bakes Occam’s Razor directly into the ordinal embedding
+learning algorithm. It removes the need to blindly guess the
+dimensionality, ensuring we neither underfit nor overparameterize the
+underlying perceptual space while still learning the relative
+similarities.</p>
 <h2>Code</h2>
 <p>Code to reproduce our results and for your own ordinal datasets is
 available at <a
@@ -338,6 +371,9 @@ comparison based machine learning library <a
 href="https://cblearn.readthedocs.io/en/stable/">cblearn</a> which would
 make calling LORE as easy as a call to a standard sciki-learn model.
 Stay tuned!</p>
+<h2>Acknowledgements</h2>
+<p>I would like to thank <a href="https://alechelbling.com/">Alec
+Helbling</a> for feedback on earlier drafts of this blog post.</p>
 <h2 class="unnumbered">References</h2>
 <div id="refs" class="references csl-bib-body" data-entry-spacing="0"
 role="list">

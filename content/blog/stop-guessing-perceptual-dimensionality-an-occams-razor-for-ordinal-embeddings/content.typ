@@ -3,12 +3,18 @@
 // #import "@preview/subpar:0.2.2"
 Based on our ICLR 2026 paper: #link("https://arxiv.org/abs/2602.04192")[LORE: Jointly Learning The Intrinsic Dimensionality and Relative Similarity Structure from Ordinal Data]
 
+#figure(
+  image("figures/crown_jewel_version_3.3.svg", width: 100%),
+  caption: [*LORE jointly learns both the intrinsic dimensionality and relative similarities.*: Other methods require the embedding dimension to be chosen apriori, making them highly susceptible to underfitting or overparameterizing the latent space.],
+) <fig:crown_jewel_teaser>
+
+
 == Introduction
 Measuring and mapping human perception quantitatively is hard. If you want to measure physical distance, you use a ruler. But if you want to measure how "sweet" a cake is, or how "aesthetic" a painting is, no absolute physical ruler exists.
 
 Historically, researchers relied on absolute queries, like asking subjects to rate a stimulus on a 1-5 Likert scale. But absolute scales are fundamentally flawed: my "moderately sweet" might be your "cloyingly sweet". Moreover, humans are quite inconsistent in their absolute judgments giving very different answers to the same questions at different times @stewart2005absolute. To get around the lack of an absolute ruler, early psychophysics @thurstone2017law @thurstone1931measurement @thurstone1931measurement and later, machine learning @shepard1962analysis1 @tamuzAdaptivelyLearningCrowd2011 @terada2014local leveraged relative queries. These ask subjects to compare stimuli against each other (e.g., "Is stimulus A more similar to B than to C?") instead of rating them in a vacuum. (Check out #link("https://vivek-anand.xyz/blog/from-scales-to-spaces-episode-1-building-the-psychological-ruler/")[Episode 1] of my blog series for more details on how relative queries allowed psychophysics to escape the absolute ruler.) 
 
-However, converting these relative judgements into a latent geometry is non-trivial. The field developed Multidimensional Scaling (MDS) algorithms @kruskal1964multidimensional, which yield exact solutions but require an exhaustive pairwise distance matrix, and Ordinal Embedding (OE) algorithms @agarwal2007generalized @tamuzAdaptivelyLearningCrowd2011 @terada2014local, which are highly data-efficient but non-convex. Despite their challenges, these methods allowed researchers to finally build multidimensional perceptual _maps_ instead of flat rulers.
+However, converting these relative judgements into a latent geometry is non-trivial. The field developed Multidimensional Scaling (MDS) algorithms @kruskal1964multidimensional, which yield exact solutions but require an exhaustive pairwise distance matrix, and Ordinal Embedding (OE) algorithms @agarwal2007generalized @tamuzAdaptivelyLearningCrowd2011 @terada2014local, which are highly data-efficient but non-convex. The non-convexity can be problematic if the algorithm settles in a particularly bad local minima leading to suboptimal embeddings that may be quite different from the true underlying percept. Despite their challenges, these methods allowed researchers to finally build multidimensional perceptual _maps_ instead of flat rulers.
 
 #figure(
   image("figures/absolute_vs_relative_scales.svg", width: 100%),
@@ -35,14 +41,21 @@ Scientific discovery demands *Occam's Razor*: we want the simplest model that ex
   caption: [*LORE jointly learns both the intrinsic dimensionality and relative similarities.*: Other methods require the embedding dimension to be chosen apriori, making them highly susceptible to underfitting or overparameterizing the latent space.],
 ) <fig:crown_jewel>
 
-== LORE: Letting the Data Tell You the Intrinsic Rank
+== LORE: Letting the Data Reveal the Intrinsic Rank
 To solve this, we introduce LORE (Low Rank Ordinal Embedding), a new algorithm that jointly learns the intrinsic rank and the relative similarities directly from the data.
 
 The core intuition behind LORE is to apply Occam's Razor mathematically. We want to balance fitting the similarity structure (which existing OEs do quite well) with penalizing unnecessary dimensions. Strictly minimizing the number of dimensions (the matrix rank) is computationally NP-Hard @fazel2001rank. The standard workaround is to use a convex relaxation called the nuclear norm @candesExactMatrixCompletion2008a.
 
-However, there is a problem: the nuclear norm uniformly shrinks _all_ singular values @negahban2011estimation @zhang2010nearly not just the lower order ones. While this works well empirically for standard matrix completion @candesExactMatrixCompletion2008a, it often fails to recover the true intrinsic rank of perceptual spaces because it over-penalizes the largest, most important dimensions that actually define the space @luGeneralizedNonconvexNonsmooth2014.
+However, there is a problem: the nuclear norm uniformly shrinks _all_ singular values @negahban2011estimation @zhang2010nearly not just the lower order ones. The reason why this is an issue is because the a low rank solution has small or negligible lower singular values but usually would have large dominant singular values. A uniform shrinkage can lead to optimization results could lead to small errors in the magnitude of the singular values that could lead to very different ranks learned. While this works well empirically for standard matrix completion @candesExactMatrixCompletion2008a, it often fails to recover the true intrinsic rank of perceptual spaces because it over-penalizes the largest, most important dimensions that actually define the space @luGeneralizedNonconvexNonsmooth2014.
 
-Instead LORE regularizes using the nonconvex Schatten $p$ Quasi-norm ($0<p<1$) @luGeneralizedNonconvexNonsmooth2014 @marjanovic2012l_q. This specific penalty is much more forgiving to the large, dominant singular values but aggressively crushes the smaller, noisy ones to zero.
+Instead LORE regularizes using the nonconvex Schatten $p$ Quasi-norm ($0<p<1$) @luGeneralizedNonconvexNonsmooth2014 @marjanovic2012l_q. This specific penalty is much more forgiving to the large, dominant singular values but aggressively crushes the smaller, noisy ones to zero. The following graph which compares the nuclear norm with the Schatten Quasi-norm visually illustrates the penalty each imposes (y axis) on the the particular singular value (x axis). 
+
+#figure(
+  image("figures/why_schatten.svg", width: 100%),
+  caption: [The Schatten $p$-quasi-norm is much more forgiving to large, dominant singular values than the nuclear norm but aggressively crushes smaller, noisy ones to zero. This allows is to empirically recover low rank solutions much more reliably than the nuclear norm.],
+) <fig:why_schatten>
+
+
 
 By balancing a smoothed ordinal embedding loss with this Schatten $p$-quasi-norm penalty, LORE automatically prunes away unnecessary dimensions during training.
 $
@@ -51,7 +64,7 @@ $
 
 $
 
-Because this objective is highly non-convex, standard optimization methods often fail. To solve this, we use an efficiently scaled, iteratively reweighted Singular Value Decomposition (SVD) algorithm @sun2017convergence. Even with the inherent non-convexity, this guarantees convergence to a stationary point. And because stationary points in OE landscapes are generally known to be nearly as good as global optima @bower2018landscape @vankadara2023insights, LORE reliably yields robust, high quality embeddings.
+Because this objective is highly non-convex, standard optimization methods often fail to learn a good enough solution. To solve this, we use an efficiently scaled, iteratively reweighted Singular Value Decomposition (SVD) algorithm @sun2017convergence. Even with the inherent non-convexity, this guarantees convergence to a stationary point. And because stationary points in OE landscapes are generally known to be nearly as good as global optima @bower2018landscape @vankadara2023insights, LORE reliably yields robust, high quality embeddings.
 
 == Does it work? Yes!
 Evaluating LORE against existing methods is tricky because, for real human data, we don't actually know the "true" intrinsic rank. Therefore, we first had to leverage synthetic data where the ground-truth rank is known.
@@ -101,10 +114,13 @@ The ultimate test of any perceptual map is whether its dimensions actually mean 
 ) <fig:interpretability>
 
 == The Takeaway
-When we model human perception, we aren't just trying to maximize predictive accuracy on a holdout set. Instead, we are trying to uncover the latent geometry of the mind. By jointly inferring relative similarities and intrinsic dimensionality, LORE bakes Occam's Razor directly into the learning process. It removes the need to blindly guess the dimensionality, ensuring we neither underfit nor overparameterize the underlying perceptual space.
+When we model human perception, we aren't just trying to maximize predictive accuracy on a holdout set. Instead, we are trying to uncover the latent perceptual maps which involve both learning the relative similarities and the intrinsic dimensionality. By jointly inferring both together, LORE bakes Occam's Razor directly into the ordinal embedding learning algorithm. It removes the need to blindly guess the dimensionality, ensuring we neither underfit nor overparameterize the underlying perceptual space while still learning the relative similarities.
 
 == Code
 Code to reproduce our results and for your own ordinal datasets is available at #link("https://github.com/vivek2000anand/lore_iclr")[https://github.com/vivek2000anand/lore_iclr]. We are in progress of integrating LORE into the open source python comparison based machine learning library #link("https://cblearn.readthedocs.io/en/stable/")[cblearn] which would make calling LORE as easy as a call to a standard sciki-learn model. Stay tuned!
+
+== Acknowledgements
+I would like to thank #link("https://alechelbling.com/")[Alec Helbling] for feedback on earlier drafts of this blog post.
 
 == References
 #bibliography("refs.bib", style:"ieee")

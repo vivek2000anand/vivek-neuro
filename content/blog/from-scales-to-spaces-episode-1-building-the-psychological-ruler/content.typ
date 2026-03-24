@@ -2,11 +2,11 @@
 == The Crisis of Confidence
 In the early 20th century, psychology was facing an identity crisis. As Joel Michell points out in his 1999 book, Measurement in Psychology @michell1999measurement, the field was under immense pressure to match the quantitative rigor of physics. At the time, giants like Einstein, Bohr, and Planck were revolutionizing our understanding of the physical world, not just through new theories, but through experiments that verified many of their predictions.
 
-Psychology, by contrast, struggled for respect within the scientific community. There was a desperate need for a quantitative framework to earn academic legitimacy. This struggle was underscored in 1940 by the Ferguson Report @ferguson1940quantitative, commissioned by the British Association for the Advancement of Science. The report concluded that there was no valid way to perform psychological measurement, effectively eviscerating the very foundation of psychology as a science at least by the standards of the time. 
+Psychology, by contrast, struggled for respect within the scientific community. There was a desperate need for a quantitative framework to earn academic legitimacy. This struggle was underscored in 1940 by the Ferguson Report @ferguson1940quantitative, commissioned by the British Association for the Advancement of Science. The report concluded that there was no valid way to perform psychological measurement, effectively eroding the very foundation of psychology as a science at least by the standards of the time. 
 
 == Why is similarity needed? And why not absolute values?
 
-The root of this evisceration was that psychology lacked a *ground truth*. In physics, we have absolute standards: a meter is a meter, and a ruler provides a direct scale for length. In psychology, however, there is no physical ruler to measure the internal perception of loudness, even if we can measure the loudness in decibels.
+The root of the criticism of the field was that psychology lacked a *ground truth*. In physics, we have absolute standards: a meter is a meter, and a ruler provides a direct scale for length. In psychology, however, there is no physical ruler to measure the internal perception of loudness, even if we can measure the loudness in decibels.
 
 This problem compounds when considering abstract concepts with no physical correlate, such as the aesthetic appeal of a painting. How do you measure beauty on an absolute scale? You cannot. At least not in a way that is objective and universally agreed upon.
 
@@ -37,7 +37,7 @@ The higher "confusion" in the second pair tells us that the gunshot and bomb bla
 
 To formalize this, Thurstone noted that the difference between two Gaussian distributions is itself Gaussian @weisstein_normal_diff. Therefore, the percentage of times that the individual perceives stimulus A as different from stimulus B is related to the distance between the two stimuli. The percentage of times an individual chooses $A$ over $B$ directly maps to the distance between their means in terms of standard deviations. By applying the Inverse Cumulative Distribution Function (Z-score) to these probabilities to obtain a distance $D_(A B) = Z(P(A > B))$,Thurstone leveraged natural human error to create a quantitative scale.
 
-But wait, we just have a collection of pairwise distances? How do you build a scale? Today, we might use Multidimensional Scaling (MDS), but that wasn't developed until the 1950s. If you don't know what MDS is, we'll cover it in a future episode. And also, this is only a One Dimensional Scale so MDS is overkill when something far simpler would suffice. Thurstone's approach was much simpler.
+But wait, we just have a collection of pairwise distances? How do you build a scale? Today, we might use #link("https://en.wikipedia.org/wiki/Multidimensional_scaling")[Multidimensional Scaling] (MDS), but that wasn't developed until the 1950s. If you don't know what MDS is, we'll cover it in a future episode. And also, this is only a One Dimensional Scale so MDS is overkill when something far simpler would suffice. Thurstone's approach was much simpler.
 
 + Create a pairwise distance matrix $bold(D)$ where $D_(i j)$ is the distance (Z-score) between stimulus $i$ and stimulus $j$ after aggregating over all of the data.
 + Average over the columns of $bold(D)$ to get a single value for each stimulus. This is akin to taking a "centroid" of the stimulus by comparing its relative score and distance to all other stimuli. By averaging how much 'better' or 'worse' a crime is compared to every other crime in the set, we find its unique coordinate on the moral map.
@@ -58,7 +58,7 @@ The resulting scale showed that the 1920s American public viewed Vagrancy and Bo
   caption: [Thurstone's Crowdsourced 1D Scale of Seriousness of Various Crimes (1927) @thurstone1927method],
 ) <fig:thurstone_scale>
 
-This method was revolutionary for its time as it enabled the quantitative measurement of abstract psychological percept without making any assumptions about the underlying percept or asking for numerical ratings. Later the same method was used to build psychological scales for a whole other set of phenomena like handwriting and personality traits @thurstone1931measurement. 
+This method was revolutionary for its time as it enabled the quantitative measurement of abstract psychological concepts without making any assumptions on how people perceive them or asking for numerical ratings. Later, the same method was used to build psychological scales for a whole other set of phenomena like handwriting and personality traits @thurstone1931measurement. 
 
 == Limitations of the 1D scale
 As revolutionary as Thurstone's 1D scale was, it had three major flaws:
