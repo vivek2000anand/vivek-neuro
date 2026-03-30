@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Users/vanand37/Documents/career_development/new_website/vivek_neuro/content/publications -name *.md)",
+      "Bash(zola build:*)"
+    ]
+  }
+}

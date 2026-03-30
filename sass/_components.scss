@@ -243,13 +243,16 @@
 }
 
 // ============ Math (MathJax) ============
-.math {
+mjx-container {
   overflow-x: auto;
-  
-  &.display {
-    margin: $spacing-lg 0;
-    text-align: center;
-  }
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+mjx-container[display="true"] {
+  display: block !important;
+  margin: $spacing-lg 0;
+  text-align: center;
 }
 
 // ============ Hero Section (Photo + Greeting) ============
