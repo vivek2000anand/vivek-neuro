@@ -1,7 +1,7 @@
 #import "@preview/ouset:0.2.0": underset
 
 // #import "@preview/subpar:0.2.2"
-Based on our ICLR 2026 paper: #link("https://arxiv.org/abs/2602.04192")[LORE: Jointly Learning The Intrinsic Dimensionality and Relative Similarity Structure from Ordinal Data]
+Based on our ICLR 2026 paper: #link("https://arxiv.org/abs/2602.04192")[LORE: Jointly Learning The Intrinsic Dimensionality and Relative Similarity Structure from Ordinal Data] (#link("/files/lore_poster_iclr2026.pdf")[poster])
 
 #figure(
   image("figures/crown_jewel_version_3.3.svg", width: 100%),

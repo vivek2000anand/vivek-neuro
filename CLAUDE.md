@@ -27,6 +27,7 @@ zola build
 # Regenerate publication pages from BibTeX
 powershell -ExecutionPolicy Bypass -File .\scripts\bib-to-zola.ps1 -BibFile publications.bib
 ```
+Sometimes you may need to run ```zola build``` or ```zola serve``` twice
 
 ## Content Workflow
 
