@@ -1,8 +1,295 @@
-<p>In the previous episode, we discussed how Thurstone built a
-psychological ruler. In this episode, we will see how we can go from a
-1D ruler to a multidimensional map.</p>
-<h2>Richardson’s argument to go Multidimensional</h2>
+<p>In the previous episode, Thurstone handed us a psychological ruler.
+By turning how often people <strong>confuse</strong> two stimuli into a
+<strong>distance</strong> between them, he built a scale for things that
+have no physical yardstick, the loudness of a sound or the seriousness
+of a crime. But a ruler only measures along a single line, and that line
+turned out to be its cage. In this episode we break out of it, and watch
+a table of numbers quietly turn into a map.</p>
+<h2>From a line to a space: why one dimension isn’t enough</h2>
+<p>Remember the dessert problem from last time. Ask someone whether a
+chocolate cake is more like a chocolate croissant or a pound cake and
+they hesitate, not because the items are identical, but because
+“similar” secretly splits into <strong>chocolatiness</strong> and
+<strong>cakeness</strong>, two different axes. Thurstone’s method reads
+that hesitation as closeness on one line, and in doing so it flattens
+two dimensions into one and throws away the very structure we care
+about.</p>
+<p>So what if we stopped forcing everything onto a line? Suppose we lay
+the stimuli out as points in a <strong>space</strong>, and treat every
+dissimilarity as the <strong>distance</strong> between two of those
+points. Confusable things sit close together, distinct things sit far
+apart, but now “close” can happen in many directions at once. This is
+the exact same move Thurstone made to get distances out of confusions,
+promoted from a line to a plane, or to a ten-dimensional cloud.</p>
+<p>It even has a familiar inverse. A road atlas prints a little
+triangular table of distances between cities: New York to Chicago,
+Chicago to Denver, and so on. A cartographer goes from the
+<strong>map</strong> to that <strong>table</strong>. We want to run the
+arrow backwards, to start with nothing but the table of distances and
+recover the map. And if we can do it for cities, maybe we can do it for
+colors, sounds, or faces.</p>
+<figure>
+<p><img src="figures/atlas_to_map.svg" style="width:100.0%" /></p>
+<figcaption><p><strong>A distance table secretly contains a
+map.</strong> Given only the pairwise distances between cities, we can
+reconstruct their positions, up to a rotation or a flip, since a map has
+no built-in sense of which way is “north.”</p></figcaption>
+</figure>
+<p><span id="fig:atlas_to_map"></span></p>
+<h2>Richardson’s argument to go multidimensional</h2>
+<p>The first person to say this out loud was Marion Webster Richardson,
+the same Richardson of the Kuder–Richardson reliability formulas, in a
+1938 talk to the American Psychological Association <span
+class="citation" data-cites="richardson1938multidimensional"><a
+href="#ref-richardson1938multidimensional"
+role="doc-biblioref">[1]</a></span>. His proposal broke from Thurstone
+in two ways. As Torgerson later summarized it, the method “does not
+require judgments along a given dimension, but utilizes, instead,
+judgments of similarity between the stimuli,” and, crucially, “the
+dimensionality, as well as the scale values, of the stimuli is
+determined from the data themselves” <span class="citation"
+data-cites="torgerson1952multidimensional"><a
+href="#ref-torgerson1952multidimensional"
+role="doc-biblioref">[2]</a></span>. You don’t tell the method how many
+dimensions there are. You let the data tell you.</p>
+<p>And he actually tried it. Richardson took Munsell color chips varying
+in brightness and saturation, collected similarity judgments using the
+<strong>method of triads</strong> (show three chips, ask which two look
+most alike), and recovered a two-dimensional layout that lined up with
+the known Munsell dimensions of <strong>value</strong> and
+<strong>chroma</strong> <span class="citation"
+data-cites="torgerson1958theory"><a href="#ref-torgerson1958theory"
+role="doc-biblioref">[3]</a></span>. Out of a pile of “which of these is
+most alike” judgments, the color space reassembled itself.</p>
+<figure>
+<p><img src="figures/richardson_color.svg" style="width:100.0%" /></p>
+<figcaption><p><strong>Colors, remapped from similarity alone.</strong>
+A reconstruction in the spirit of Richardson’s 1938 experiment:
+classical scaling applied to perceptual distances between Munsell chips
+recovers a two-dimensional grid whose axes are value (brightness) and
+chroma (saturation). Richardson’s original judgments are lost, so this
+is a modern stand-in for his result.</p></figcaption>
+</figure>
+<p><span id="fig:richardson_color"></span></p>
+<p>But Richardson had an argument, not an algorithm. He could see that a
+table of dissimilarities <strong>ought</strong> to contain a spatial
+map. He could not yet say, given the table, exactly how to compute the
+coordinates, or how to read off the number of dimensions. For that, he
+turned to two mathematicians.</p>
 <h2>Young and Householder’s math to make it happen</h2>
-<h2>Torgerson’s method to construct these spaces.</h2>
-<h2>But need to specify relationships and not people</h2>
-<h2>In Progress!!!</h2>
+<p>In that same year, Gale Young and Alston Householder answered
+Richardson’s question completely and exactly. Their four-page paper
+opens by crediting him: it was written “in response to suggestions by
+Harold Gulliksen and by M. W. Richardson,” whose problem made “the
+dimensionality of a set of points whose mutual distances are available”
+the central idea <span class="citation"
+data-cites="young1938discussion"><a href="#ref-young1938discussion"
+role="doc-biblioref">[4]</a></span>.</p>
+<p>Here is the obstacle they had to clear. A table of distances does not
+pin down coordinates, because you can slide, rotate, or flip an entire
+constellation of points without changing a single distance between them.
+Their fix is elegant: nail one point down as the origin, and convert
+every distance into a <strong>scalar product</strong>, a number that
+captures how aligned two points are as seen from that origin. The law of
+cosines does the conversion:</p>
+<p><span class="math display">\[b_{ij} = \frac{1}{2}\left( d_{in}^{2} +
+d_{jn}^{2} - d_{ij}^{2} \right)\]</span></p>
+<p>Collect these numbers into a matrix <span
+class="math inline">\(\mathbf{B}\)</span>, and three questions all get
+answered at once, just by looking at it:</p>
+<ol>
+<li><p><strong>Is this even a real set of distances?</strong> Yes, if
+and only if <span class="math inline">\(\mathbf{B}\)</span> is
+<strong>positive semi-definite</strong>, meaning it has no negative
+eigenvalues. This is, in their words, “a necessary and sufficient
+condition for a set of numbers … to be the mutual distances of a real
+set of points in Euclidean space,” and when it holds the configuration
+is “unique apart from a Euclidean transformation” <span class="citation"
+data-cites="young1938discussion"><a href="#ref-young1938discussion"
+role="doc-biblioref">[4]</a></span>.</p></li>
+<li><p><strong>How many dimensions do the points need?</strong> Exactly
+the <strong>rank</strong> of <span
+class="math inline">\(\mathbf{B}\)</span>, the number of nonzero
+eigenvalues. This is the direct answer to Richardson: the dimensionality
+is not assumed, it is read straight off the matrix.</p></li>
+<li><p><strong>Where are the points?</strong> Factor <span
+class="math inline">\(\mathbf{B} =
+\mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^{T}\)</span>, and the coordinates
+are <span class="math inline">\(\mathbf{X} =
+\mathbf{Q}\mathbf{\Lambda}^{\frac{1}{2}}\)</span>, the eigenvectors
+stretched by the square roots of the eigenvalues.</p></li>
+</ol>
+<p>Feed in a clean table of distances, turn one crank, and out fall both
+the map and its true dimensionality. A table of numbers really does
+contain a picture. (A pleasing footnote for us: for the actual
+factorization, Young and Householder point the reader to “a method given
+by Thurstone,” the same Thurstone from Episode 1.)</p>
+<figure>
+<p><img src="figures/classical_mds_pipeline.svg"
+style="width:100.0%" /></p>
+<figcaption><p><strong>One crank from distances to coordinates.</strong>
+Turn the table of distances into the scalar-product matrix <span
+class="math inline">\(\mathbf{B}\)</span>, then read off its answers:
+the rank gives the dimensionality, and the eigenvectors give the
+coordinates.</p></figcaption>
+</figure>
+<p><span id="fig:pipeline"></span></p>
+<p><em>An aside worth savoring. In 1938 Alston Householder was a young
+mathematician in Nicolas Rashevsky’s mathematical-biology group at
+Chicago, and the eigen-factorization his own paper calls for had to be
+ground out by hand. A decade later, at Oak Ridge, he would invent the
+Householder transformation <span class="citation"
+data-cites="householder1958unitary"><a
+href="#ref-householder1958unitary" role="doc-biblioref">[5]</a></span>,
+one of the workhorse algorithms computers still use to compute exactly
+these decompositions. The man who taught machines to do the arithmetic
+first co-wrote the paper that demanded it.</em></p>
+<p>So we are done, right? Given distances, we can build the space.
+Except for one enormous catch, and it is the reason this beautiful
+result sat on a shelf for years.</p>
+<h2>Torgerson’s method to construct these spaces</h2>
+<p>Young and Householder’s machine assumes you already hold a clean,
+exact table of Euclidean distances. Read their paper and you will find
+no mention of error, of noise, or of fallible human judgment; the
+distances are simply <strong>given</strong>. But where would a
+psychologist get exact distances? Experiments do not hand you distances.
+They hand you <strong>comparative judgments</strong>, and, as we saw
+with Thurstone, those are only distances up to an unknown shift and a
+great deal of noise. Torgerson put it precisely: a comparative distance
+“is not a distance in the usual sense of the term, but is a distance
+minus an unknown constant” <span class="citation"
+data-cites="torgerson1952multidimensional"><a
+href="#ref-torgerson1952multidimensional"
+role="doc-biblioref">[2]</a></span>.</p>
+<p>Closing that gap, between the messy numbers an experiment produces
+and the exact distances the theorem demands, is what Warren Torgerson
+did in 1952. He extended Young and Householder’s model “to include
+procedures for obtaining the projections of stimuli on axes from
+<strong>fallible</strong> absolute distances,” and he cracked the
+<strong>additive constant problem</strong>: how to recover the unknown
+offset <span class="math inline">\(C\)</span> that turns a comparative
+number <span class="math inline">\(h_{ij}\)</span> into a genuine
+distance <span class="math inline">\(d_{ij} = h_{ij} + C\)</span> <span
+class="citation" data-cites="torgerson1952multidimensional"><a
+href="#ref-torgerson1952multidimensional"
+role="doc-biblioref">[2]</a></span>. Guess <span
+class="math inline">\(C\)</span> wrong and <span
+class="math inline">\(\mathbf{B}\)</span> sprouts negative eigenvalues,
+and the machine seizes up, insisting your data cannot live in any real
+space. Get it right, write down the step-by-step recipe, and for the
+first time a working psychologist could actually run the thing.
+Torgerson even gave it the name we still use today:
+<strong>multidimensional scaling</strong>.</p>
+<p>The division of labor is worth stating plainly. <strong>Young and
+Householder solved the mathematics. Torgerson solved the
+data.</strong></p>
+<figure>
+<p><img src="figures/measurement_vs_geometry.svg"
+style="width:100.0%" /></p>
+<figcaption><p><strong>Two different problems.</strong> Young and
+Householder solved a problem of pure geometry: clean distances in,
+coordinates out. But real experiments live one step earlier, in the
+problem of measurement, where all you have are noisy comparative
+judgments. Torgerson built the bridge between them.</p></figcaption>
+</figure>
+<p><span id="fig:measurement_vs_geometry"></span></p>
+<h2>But this was really hard</h2>
+<p>And yet, even with Torgerson’s recipe in hand, multidimensional
+scaling barely caught on for another two decades. Torgerson himself,
+writing in 1952, noticed the silence: apart from Richardson’s own
+experiment, “only one person, Klingberg, has used the model.” His
+diagnosis is the honest heart of this story: “It may well be that one of
+the reasons for the lack of experimental investigation in this area is
+that no clear statement of analytical procedure has been published”
+<span class="citation" data-cites="torgerson1952multidimensional"><a
+href="#ref-torgerson1952multidimensional"
+role="doc-biblioref">[2]</a></span>. The mathematics had existed since
+1938. A <strong>usable</strong> recipe had not.</p>
+<p>But there were deeper problems than missing instructions:</p>
+<ol>
+<li><p><strong>It demands exact, metric distances.</strong> The whole
+pipeline treats your dissimilarities as true distances on a ratio scale.
+But human similarity judgments are really only trustworthy as a
+<strong>ranking</strong>: we can say that A and B are more alike than C
+and D, but not that they differ by exactly 1.7 units. Classical scaling
+asks for a precision the data simply does not have.</p></li>
+<li><p><strong>Noise breaks the geometry.</strong> With real, fallible
+data the scalar-product matrix stops being positive semi-definite.
+Torgerson saw it at once: errors “would tend to change some zero roots
+in the positive direction and some in the negative.” Negative
+eigenvalues mean the tidy “rank equals dimensionality” answer dissolves
+into a judgment call, and the recovered map starts to wobble.</p></li>
+<li><p><strong>The arithmetic was brutal.</strong> Eigen-decomposing a
+matrix by hand, on a desk calculator, was feasible only for a handful of
+stimuli, and there was no software to lean on. The ten-city map above
+takes a modern computer a few microseconds; in 1938 it would have been
+days of careful, error-prone work.</p></li>
+</ol>
+<figure>
+<p><img src="figures/eigenvalue_spectrum.svg"
+style="width:100.0%" /></p>
+<figcaption><p><strong>Where the method cracks.</strong> With clean
+distances the eigenvalues drop to zero once you pass the true
+dimensionality, telling you exactly how many dimensions you need. Feed
+in noisy human data and some eigenvalues go <strong>negative</strong>,
+muddying both the map and the count.</p></figcaption>
+</figure>
+<p><span id="fig:eigenvalue_spectrum"></span></p>
+<p>Klingberg’s lone application, incidentally, was not about perception
+at all: he used the model to map the <strong>relations among sovereign
+states</strong> <span class="citation"
+data-cites="klingberg1941studies"><a href="#ref-klingberg1941studies"
+role="doc-biblioref">[6]</a></span>. The idea was clearly powerful. It
+simply demanded data cleaner, and computation cheaper, than 1940s
+psychology could supply.</p>
+<h2>Coming up next</h2>
+<p>So the exact answer had been sitting in plain sight since 1938, and
+it <strong>still</strong> was not enough. What finally set
+multidimensional scaling loose was a change of ambition: stop insisting
+on exact distances, and use only the part of the data we actually trust,
+the <strong>rank order</strong> of the dissimilarities. Define a score
+for how badly a map violates that ordering, then let a computer nudge
+the points around until the score bottoms out. That is
+<strong>nonmetric</strong> MDS, the version that would sweep through
+psychology in the 1960s, and it is where Episode 3 picks up.</p>
+<p>Stay tuned!</p>
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0"
+role="list">
+<div id="ref-richardson1938multidimensional" class="csl-entry"
+role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M.
+W. Richardson, <span>“Multidimensional psychophysics,”</span>
+<em>Psychological Bulletin</em>, vol. 35, pp. 659–660, 1938.</div>
+</div>
+<div id="ref-torgerson1952multidimensional" class="csl-entry"
+role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">W.
+S. Torgerson, <span>“Multidimensional scaling: I. Theory and
+method,”</span> <em>Psychometrika</em>, vol. 17, no. 4, pp. 401–419,
+1952.</div>
+</div>
+<div id="ref-torgerson1958theory" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">W.
+S. Torgerson, <em>Theory and methods of scaling</em>. New York: Wiley,
+1958.</div>
+</div>
+<div id="ref-young1938discussion" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">G.
+Young and A. S. Householder, <span>“Discussion of a set of points in
+terms of their mutual distances,”</span> <em>Psychometrika</em>, vol. 3,
+no. 1, pp. 19–22, 1938.</div>
+</div>
+<div id="ref-householder1958unitary" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">A.
+S. Householder, <span>“Unitary triangularization of a nonsymmetric
+matrix,”</span> <em>Journal of the ACM</em>, vol. 5, no. 4, pp. 339–342,
+1958.</div>
+</div>
+<div id="ref-klingberg1941studies" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">F.
+L. Klingberg, <span>“Studies in the measurement of the relations among
+sovereign states,”</span> <em>Psychometrika</em>, vol. 6, no. 6, pp.
+335–352, 1941.</div>
+</div>
+</div>
