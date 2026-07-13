@@ -8,6 +8,22 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
 
+# Build inputs and helper files that live next to posts but should NOT be treated
+# as Zola pages or copied into the published site. The typst shortcode reads
+# content.html from the source tree via load_data, so it does not need copying;
+# a stray .md with no front matter would otherwise break the whole build.
+ignored_content = [
+    "**/content.typ",
+    "**/content.html",
+    "**/refs.bib",
+    "**/content.pdf",
+    "**/figures/*.py",
+    "**/figures/*.md",
+    "**/figures/*.typ",
+    "**/figures/*.html",
+    "**/__pycache__/**",
+]
+
 # Enable tags taxonomy
 taxonomies = [
     { name = "tags", feed = true }
