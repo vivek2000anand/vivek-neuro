@@ -42,40 +42,53 @@ the same Richardson of the Kuder–Richardson reliability formulas, in a
 1938 talk to the American Psychological Association <span
 class="citation" data-cites="richardson1938multidimensional"><a
 href="#ref-richardson1938multidimensional"
-role="doc-biblioref">[1]</a></span>. His proposal broke from Thurstone
-in two ways. As Torgerson later summarized it, the method “does not
-require judgments along a given dimension, but utilizes, instead,
-judgments of similarity between the stimuli,” and, crucially, “the
-dimensionality, as well as the scale values, of the stimuli is
-determined from the data themselves” <span class="citation"
-data-cites="torgerson1952multidimensional"><a
-href="#ref-torgerson1952multidimensional"
-role="doc-biblioref">[2]</a></span>. You don’t tell the method how many
-dimensions there are. You let the data tell you.</p>
-<p>And he actually tried it. Richardson took Munsell color chips varying
-in brightness and saturation, collected similarity judgments using the
-<strong>method of triads</strong> (show three chips, ask which two look
-most alike), and recovered a two-dimensional layout that lined up with
-the known Munsell dimensions of <strong>value</strong> and
-<strong>chroma</strong> <span class="citation"
-data-cites="torgerson1958theory"><a href="#ref-torgerson1958theory"
-role="doc-biblioref">[3]</a></span>. Out of a pile of “which of these is
-most alike” judgments, the color space reassembled itself.</p>
+role="doc-biblioref">[1]</a></span>. He named the problem exactly. The
+“traditional psychophysical methods are limited to one dimension,” he
+noted, yet often “the basis for psychophysical judgments is a complex of
+variables instead of a single variable,” which had forced everyone “to
+be content with an inferior one-dimensional approximation” <span
+class="citation" data-cites="richardson1938multidimensional"><a
+href="#ref-richardson1938multidimensional"
+role="doc-biblioref">[1]</a></span>. His remedy was to scale judgments
+in <span class="math inline">\(m\)</span> dimensions and let the data
+decide how many were really needed.</p>
+<p>And he did more than theorize; he ran the experiment. Richardson
+showed people “nine (Munsell) colored cards arranged in triadic
+combinations,” the method of triads, to get “scale-distances between all
+pairs of stimuli,” then recovered “the representation, as points in a
+space approximating to two dimensions, of the colors used,” reading off
+“the relative contributions to similarity of saturation and brightness”
+<span class="citation" data-cites="richardson1938multidimensional"><a
+href="#ref-richardson1938multidimensional"
+role="doc-biblioref">[1]</a></span>. Out of a heap of “which two of
+these three look most alike” judgments, a two-dimensional color space
+reassembled itself. (Torgerson, who later re-ran the study, matched
+Richardson’s two axes to the Munsell dimensions of value and chroma
+<span class="citation" data-cites="torgerson1958theory"><a
+href="#ref-torgerson1958theory"
+role="doc-biblioref">[2]</a></span>.)</p>
 <figure>
 <p><img src="figures/richardson_color.svg" style="width:100.0%" /></p>
 <figcaption><p><strong>Colors, remapped from similarity alone.</strong>
 A reconstruction in the spirit of Richardson’s 1938 experiment:
 classical scaling applied to perceptual distances between Munsell chips
-recovers a two-dimensional grid whose axes are value (brightness) and
-chroma (saturation). Richardson’s original judgments are lost, so this
-is a modern stand-in for his result.</p></figcaption>
+recovers a two-dimensional grid whose axes are brightness and
+saturation, the Munsell dimensions of value and chroma. Richardson’s
+original judgments are lost, so this is a modern stand-in for his
+result.</p></figcaption>
 </figure>
 <p><span id="fig:richardson_color"></span></p>
-<p>But Richardson had an argument, not an algorithm. He could see that a
-table of dissimilarities <strong>ought</strong> to contain a spatial
-map. He could not yet say, given the table, exactly how to compute the
-coordinates, or how to read off the number of dimensions. For that, he
-turned to two mathematicians.</p>
+<p>There was just one soft spot. To decide how many dimensions the
+colors needed, Richardson leaned on “a theorem concerning the rank of a
+certain matrix … as a criterion for determining the number of factors
+involved” <span class="citation"
+data-cites="richardson1938multidimensional"><a
+href="#ref-richardson1938multidimensional"
+role="doc-biblioref">[1]</a></span>, but he was adapting a result he had
+not proved. He had the idea, the experiment, and the right instinct that
+dimensionality lives in the rank of a matrix; what he lacked was the
+rigorous mathematics beneath it. For that, he turned to two
+mathematicians.</p>
 <h2>Young and Householder’s math to make it happen</h2>
 <p>In that same year, Gale Young and Alston Householder answered
 Richardson’s question completely and exactly. Their four-page paper
@@ -84,43 +97,76 @@ Harold Gulliksen and by M. W. Richardson,” whose problem made “the
 dimensionality of a set of points whose mutual distances are available”
 the central idea <span class="citation"
 data-cites="young1938discussion"><a href="#ref-young1938discussion"
-role="doc-biblioref">[4]</a></span>.</p>
+role="doc-biblioref">[3]</a></span>.</p>
 <p>Here is the obstacle they had to clear. A table of distances does not
 pin down coordinates, because you can slide, rotate, or flip an entire
 constellation of points without changing a single distance between them.
-Their fix is elegant: nail one point down as the origin, and convert
-every distance into a <strong>scalar product</strong>, a number that
-captures how aligned two points are as seen from that origin. The law of
-cosines does the conversion:</p>
-<p><span class="math display">\[b_{ij} = \frac{1}{2}\left( d_{in}^{2} +
-d_{jn}^{2} - d_{ij}^{2} \right)\]</span></p>
-<p>Collect these numbers into a matrix <span
-class="math inline">\(\mathbf{B}\)</span>, and three questions all get
-answered at once, just by looking at it:</p>
+Their fix is elegant: nail one point down as the origin, and turn every
+distance into a <strong>scalar product</strong>, a single number that
+captures how aligned two points are as seen from that origin. Put the
+origin at point <span class="math inline">\(n\)</span>, write <span
+class="math inline">\(\mathbf{x}_{i}\)</span> for the position of point
+<span class="math inline">\(i\)</span> measured from there, and the law
+of cosines gives</p>
+<p><span class="math display">\[b_{ij} =
+\langle\mathbf{x}_{i},\mathbf{x}_{j}\rangle = \frac{1}{2}\left(
+d_{in}^{2} + d_{jn}^{2} - d_{ij}^{2} \right),\]</span></p>
+<p>a quantity we can compute from the distances alone. Stack these
+numbers into an <span class="math inline">\(n \times n\)</span> matrix
+<span class="math inline">\(\mathbf{B}\)</span>.</p>
+<p>Now comes the observation the whole method balances on. If we gather
+the (still unknown) coordinates as the rows of a matrix <span
+class="math inline">\(\mathbf{X}\)</span>, then <span
+class="math inline">\(\mathbf{B} = \mathbf{X}\mathbf{X}^{T}\)</span>:
+the table of scalar products is nothing but the coordinates multiplied
+by their own transpose. That single identity, that <span
+class="math inline">\(\mathbf{B}\)</span> is a <strong>Gram
+matrix</strong>, answers all three of Richardson’s questions at once.
+(If you only want the gist, the three bold questions below are the whole
+story; the algebra just says why each answer is forced.)</p>
 <ol>
-<li><p><strong>Is this even a real set of distances?</strong> Yes, if
-and only if <span class="math inline">\(\mathbf{B}\)</span> is
-<strong>positive semi-definite</strong>, meaning it has no negative
-eigenvalues. This is, in their words, “a necessary and sufficient
-condition for a set of numbers … to be the mutual distances of a real
-set of points in Euclidean space,” and when it holds the configuration
-is “unique apart from a Euclidean transformation” <span class="citation"
+<li><p><strong>Is this even a real set of distances?</strong> A Gram
+matrix is always <strong>positive semi-definite</strong>: for any vector
+<span class="math inline">\(\mathbf{v}\)</span>, <span
+class="math inline">\(\mathbf{v}^{T}\mathbf{B}\mathbf{v} =
+\mathbf{v}^{T}\mathbf{X}\mathbf{X}^{T}\mathbf{v} = \left\|
+{\mathbf{X}^{T}\mathbf{v}} \right\|^{2} \geq 0\)</span>, so <span
+class="math inline">\(\mathbf{B}\)</span> can never have a negative
+eigenvalue. Young and Householder proved the converse too:
+<strong>any</strong> positive semi-definite matrix can be factored as
+<span class="math inline">\(\mathbf{X}\mathbf{X}^{T}\)</span>, so it
+always corresponds to a genuine set of points. Their theorem is exactly
+this, “a necessary and sufficient condition for a set of numbers … to be
+the mutual distances of a real set of points in Euclidean space is that
+the matrix <span class="math inline">\(\mathbf{B}\)</span> … be positive
+semi-definite,” with the configuration “unique apart from a Euclidean
+transformation” <span class="citation"
 data-cites="young1938discussion"><a href="#ref-young1938discussion"
-role="doc-biblioref">[4]</a></span>.</p></li>
-<li><p><strong>How many dimensions do the points need?</strong> Exactly
-the <strong>rank</strong> of <span
-class="math inline">\(\mathbf{B}\)</span>, the number of nonzero
-eigenvalues. This is the direct answer to Richardson: the dimensionality
-is not assumed, it is read straight off the matrix.</p></li>
-<li><p><strong>Where are the points?</strong> Factor <span
-class="math inline">\(\mathbf{B} =
-\mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^{T}\)</span>, and the coordinates
-are <span class="math inline">\(\mathbf{X} =
-\mathbf{Q}\mathbf{\Lambda}^{\frac{1}{2}}\)</span>, the eigenvectors
-stretched by the square roots of the eigenvalues.</p></li>
+role="doc-biblioref">[3]</a></span>. A single negative eigenvalue is
+proof that no Euclidean map can reproduce your distances.</p></li>
+<li><p><strong>How many dimensions do the points need?</strong>
+Diagonalize <span class="math inline">\(\mathbf{B} =
+\mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^{T}\)</span>, so its eigenvalues
+<span class="math inline">\(\lambda_{1} \geq \lambda_{2} \geq \ldots
+\geq 0\)</span> line up along <span
+class="math inline">\(\mathbf{\Lambda}\)</span>. The number of
+<strong>strictly positive</strong> eigenvalues is the
+<strong>rank</strong> of <span
+class="math inline">\(\mathbf{B}\)</span>, and that is the
+dimensionality: a cloud that genuinely lies in a plane has exactly two
+positive eigenvalues and the rest are zero. You do not assume the number
+of dimensions, you count it off the spectrum.</p></li>
+<li><p><strong>Where are the points?</strong> Take <span
+class="math inline">\(\mathbf{X} =
+\mathbf{Q}\mathbf{\Lambda}^{\frac{1}{2}}\)</span>: each eigenvector,
+stretched by the square root of its eigenvalue, becomes one coordinate
+axis. The largest eigenvalue marks the direction the points spread along
+the most, the next-largest the second, and so on, the very same
+machinery that powers principal component analysis. Keep the top two
+eigenvalues and you have a map you can draw on a page.</p></li>
 </ol>
-<p>Feed in a clean table of distances, turn one crank, and out fall both
-the map and its true dimensionality. A table of numbers really does
+<p>Feed in a clean table of distances, turn this one crank, and out fall
+both the map and its true dimensionality. A table of numbers really does
 contain a picture. (A pleasing footnote for us: for the actual
 factorization, Young and Householder point the reader to “a method given
 by Thurstone,” the same Thurstone from Episode 1.)</p>
@@ -140,7 +186,7 @@ Chicago, and the eigen-factorization his own paper calls for had to be
 ground out by hand. A decade later, at Oak Ridge, he would invent the
 Householder transformation <span class="citation"
 data-cites="householder1958unitary"><a
-href="#ref-householder1958unitary" role="doc-biblioref">[5]</a></span>,
+href="#ref-householder1958unitary" role="doc-biblioref">[4]</a></span>,
 one of the workhorse algorithms computers still use to compute exactly
 these decompositions. The man who taught machines to do the arithmetic
 first co-wrote the paper that demanded it.</em></p>
@@ -160,26 +206,49 @@ great deal of noise. Torgerson put it precisely: a comparative distance
 minus an unknown constant” <span class="citation"
 data-cites="torgerson1952multidimensional"><a
 href="#ref-torgerson1952multidimensional"
-role="doc-biblioref">[2]</a></span>.</p>
+role="doc-biblioref">[5]</a></span>.</p>
 <p>Closing that gap, between the messy numbers an experiment produces
 and the exact distances the theorem demands, is what Warren Torgerson
-did in 1952. He extended Young and Householder’s model “to include
-procedures for obtaining the projections of stimuli on axes from
-<strong>fallible</strong> absolute distances,” and he cracked the
-<strong>additive constant problem</strong>: how to recover the unknown
-offset <span class="math inline">\(C\)</span> that turns a comparative
-number <span class="math inline">\(h_{ij}\)</span> into a genuine
-distance <span class="math inline">\(d_{ij} = h_{ij} + C\)</span> <span
+did in 1952. He set out, in his words, to extend Young and Householder’s
+model “to include procedures for obtaining the projections of stimuli on
+axes from <strong>fallible</strong> absolute distances” <span
 class="citation" data-cites="torgerson1952multidimensional"><a
 href="#ref-torgerson1952multidimensional"
-role="doc-biblioref">[2]</a></span>. Guess <span
-class="math inline">\(C\)</span> wrong and <span
-class="math inline">\(\mathbf{B}\)</span> sprouts negative eigenvalues,
-and the machine seizes up, insisting your data cannot live in any real
-space. Get it right, write down the step-by-step recipe, and for the
-first time a working psychologist could actually run the thing.
-Torgerson even gave it the name we still use today:
-<strong>multidimensional scaling</strong>.</p>
+role="doc-biblioref">[5]</a></span>, real data rather than the pristine
+kind. Make the problem concrete. A procedure like the method of triads
+hands you numbers <span class="math inline">\(h_{ij}\)</span> that
+behave like distances on an <strong>interval</strong> scale: their
+differences are meaningful, but their zero point is not. The true,
+ratio-scale distance the theorem actually needs is</p>
+<p><span class="math display">\[d_{ij} = h_{ij} + c,\]</span></p>
+<p>for a single unknown constant <span class="math inline">\(c\)</span>
+shared by every pair, and pinning down <span
+class="math inline">\(c\)</span> is Torgerson’s <strong>additive
+constant problem</strong>. It is no mere bookkeeping: the
+Young–Householder machine only accepts the true <span
+class="math inline">\(d_{ij}\)</span>, so nothing can begin until <span
+class="math inline">\(c\)</span> is fixed.</p>
+<p>Torgerson’s move was to let the geometry choose <span
+class="math inline">\(c\)</span> for itself. Recall the two demands on
+<span class="math inline">\(\mathbf{B}\)</span>: it must be positive
+semi-definite, and its rank is the dimensionality. Set <span
+class="math inline">\(c\)</span> too small and <span
+class="math inline">\(\mathbf{B}\)</span> grows negative eigenvalues,
+the distances describe no real space at all; set it too large and you
+needlessly inflate the cloud into extra dimensions. The right <span
+class="math inline">\(c\)</span> is the smallest one that lets the data
+sit in a real Euclidean space of the <strong>lowest</strong>
+dimensionality, and Torgerson supplied practical least-squares
+procedures to estimate it <span class="citation"
+data-cites="torgerson1952multidimensional"><a
+href="#ref-torgerson1952multidimensional"
+role="doc-biblioref">[5]</a></span>. Fix <span
+class="math inline">\(c\)</span>, build <span
+class="math inline">\(\mathbf{B}\)</span> (in practice by centering at
+the cloud’s centroid rather than one corner point, a cosmetic change
+that treats every point evenhandedly), run the eigendecomposition from
+the last section, and the map falls out. He also handed the method the
+name we still use today: <strong>multidimensional scaling</strong>.</p>
 <p>The division of labor is worth stating plainly. <strong>Young and
 Householder solved the mathematics. Torgerson solved the
 data.</strong></p>
@@ -203,7 +272,7 @@ the reasons for the lack of experimental investigation in this area is
 that no clear statement of analytical procedure has been published”
 <span class="citation" data-cites="torgerson1952multidimensional"><a
 href="#ref-torgerson1952multidimensional"
-role="doc-biblioref">[2]</a></span>. The mathematics had existed since
+role="doc-biblioref">[5]</a></span>. The mathematics had existed since
 1938. A <strong>usable</strong> recipe had not.</p>
 <p>But there were deeper problems than missing instructions:</p>
 <ol>
@@ -260,31 +329,33 @@ role="list">
 role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline">M.
 W. Richardson, <span>“Multidimensional psychophysics,”</span>
-<em>Psychological Bulletin</em>, vol. 35, pp. 659–660, 1938.</div>
-</div>
-<div id="ref-torgerson1952multidimensional" class="csl-entry"
-role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">W.
-S. Torgerson, <span>“Multidimensional scaling: I. Theory and
-method,”</span> <em>Psychometrika</em>, vol. 17, no. 4, pp. 401–419,
-1952.</div>
+<em>Psychological Bulletin</em>, vol. 35, pp. 659–660, 1938, Available:
+<a
+href="https://archive.org/details/sim_psychological-bulletin_1938-11_35_9/page/659/mode/2up">https://archive.org/details/sim_psychological-bulletin_1938-11_35_9/page/659/mode/2up</a></div>
 </div>
 <div id="ref-torgerson1958theory" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">W.
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">W.
 S. Torgerson, <em>Theory and methods of scaling</em>. New York: Wiley,
 1958.</div>
 </div>
 <div id="ref-young1938discussion" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline">G.
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">G.
 Young and A. S. Householder, <span>“Discussion of a set of points in
 terms of their mutual distances,”</span> <em>Psychometrika</em>, vol. 3,
 no. 1, pp. 19–22, 1938.</div>
 </div>
 <div id="ref-householder1958unitary" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline">A.
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">A.
 S. Householder, <span>“Unitary triangularization of a nonsymmetric
 matrix,”</span> <em>Journal of the ACM</em>, vol. 5, no. 4, pp. 339–342,
 1958.</div>
+</div>
+<div id="ref-torgerson1952multidimensional" class="csl-entry"
+role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">W.
+S. Torgerson, <span>“Multidimensional scaling: I. Theory and
+method,”</span> <em>Psychometrika</em>, vol. 17, no. 4, pp. 401–419,
+1952.</div>
 </div>
 <div id="ref-klingberg1941studies" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[6] </div><div class="csl-right-inline">F.
