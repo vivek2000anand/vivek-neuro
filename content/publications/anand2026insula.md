@@ -8,7 +8,6 @@ authors = "Anand, Vivek, May, Camilla, Laxpati, Neal, Gleichgerrcht, Zeke, Tread
 venue = "Poster presented at the Society of Biological Psychiatry (SOBP) Annual Meeting"
 entry_type = "article"
 cite_key = "anand2026insula"
-paper_url = "https://www.biologicalpsychiatryjournal.com/article/S0006-3223(26)01062-0/abstract"
 poster_url = "files/Alagapan_SOBP2026_Poster.pdf"
 
 [taxonomies]
