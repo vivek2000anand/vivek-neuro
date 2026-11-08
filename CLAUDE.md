@@ -27,7 +27,7 @@ zola build
 # Regenerate publication pages from BibTeX
 powershell -ExecutionPolicy Bypass -File .\scripts\bib-to-zola.ps1 -BibFile publications.bib
 ```
-Sometimes you may need to run ```zola build``` or ```zola serve``` twice
+Do not set `transparent = true` on sections: with zola 0.21 on Windows it makes pages render twice, which makes `zola build` fail with "os error 32" while copying post images (getzola/zola#1599). The homepage loads sections with `get_section`, so it is not needed.
 
 ## Content Workflow
 
